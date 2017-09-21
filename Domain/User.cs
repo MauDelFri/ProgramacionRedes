@@ -16,5 +16,11 @@ namespace Domain
         public List<Message> PendingMessages { get; set; }
 
         public User() { }
+
+        public User(string username, string password)
+        {
+            this.Username = username;
+            this.Password = password;
+        }
     }
 }

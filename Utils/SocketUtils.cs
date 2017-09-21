@@ -59,9 +59,9 @@ namespace Utils
         {
             var data = item.GetAsByteArray();
             int sent = 0;
-            while (sent < FixedMessageLengthSize)
+            while (sent < data.Length)
             {
-                sent += socket.Send(data, sent, FixedMessageLengthSize - sent, SocketFlags.None);
+                sent += socket.Send(data, sent, data.Length - sent, SocketFlags.None);
             }
         }
     }

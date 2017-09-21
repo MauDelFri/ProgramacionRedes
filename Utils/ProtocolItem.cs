@@ -15,10 +15,18 @@ namespace Utils
 
         public ProtocolItem() { }
 
+        public ProtocolItem(string header, int command, string data)
+        {
+            this.Header = header;
+            this.Command = command;
+            this.Data = data;
+            this.MessageLength = System.Text.Encoding.ASCII.GetBytes(this.Data).Length;
+        }
+
         public byte[] GetAsByteArray()
         {
-            byte[] protocolItemByteArray = System.Text.Encoding.ASCII.GetBytes(this.Header.ToCharArray(), 0, 3);
-            protocolItemByteArray.Concat(BitConverter.GetBytes(this.Command).Skip(6));
+            byte[] protocolItemByteArray = System.Text.Encoding.ASCII.GetBytes(this.Header.ToCharArray(), 0, 2);
+            protocolItemByteArray.Concat(BitConverter.GetBytes(this.Command).Skip(2));
             protocolItemByteArray.Concat(BitConverter.GetBytes(this.MessageLength));
             protocolItemByteArray.Concat(System.Text.Encoding.ASCII.GetBytes(this.Data));
 
