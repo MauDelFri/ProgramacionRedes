@@ -9,12 +9,14 @@ namespace Obligarorio1
 {
     public class FunctionalityMapper
     {
-        public void MapCommandToService(ProtocolItem message)
+        public FunctionalityMapper() { }
+
+        public void MapCommandToService(ProtocolItem message, HandleClient handleClient)
         {
-            ServerService service = new ServerService();
+            ServerService service = new ServerService(handleClient);
             switch (message.Command)
             {
-                case 1:
+                case Constants.LOGIN_CODE:
                     service.LoginService(message.Data);
                     break;
                 default:

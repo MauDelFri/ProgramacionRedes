@@ -13,7 +13,11 @@ namespace Utils
         public int MessageLength { get; set; }
         public String Data { get; set; }
 
-        public ProtocolItem() { }
+        public ProtocolItem()
+        {
+            this.Data = "";
+            this.MessageLength = 0;
+        }
 
         public ProtocolItem(string header, int command, string data)
         {

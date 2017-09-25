@@ -3,3 +3,8 @@ C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Uti
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Utils\obj\Debug\Utils.csprojResolveAssemblyReference.cache
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Utils\obj\Debug\Utils.dll
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Utils\obj\Debug\Utils.pdb
+C:\Proyectos\programacion-de-redes\Utils\bin\Debug\Utils.dll
+C:\Proyectos\programacion-de-redes\Utils\bin\Debug\Utils.pdb
+C:\Proyectos\programacion-de-redes\Utils\obj\Debug\Utils.csprojResolveAssemblyReference.cache
+C:\Proyectos\programacion-de-redes\Utils\obj\Debug\Utils.dll
+C:\Proyectos\programacion-de-redes\Utils\obj\Debug\Utils.pdb

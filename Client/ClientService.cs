@@ -37,7 +37,8 @@ namespace Client
 
             String dataToSend = username + "-" + password;
             ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.LOGIN_CODE, dataToSend);
-            ProtocolItem response = SocketUtils.SendMessage(this.socket, message);
+            SocketUtils.SendMessage(this.socket, message);
+            ProtocolItem response = SocketUtils.RecieveMessage(this.socket);
             this.OnLoginResponse(response);
         }
 

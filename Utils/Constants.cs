@@ -10,8 +10,11 @@ namespace Utils
     {
         public static string REQUEST_HEADER = "REQ";
         public static string RESPONSE_HEADER = "RES";
-        public static int ERROR_CODE = 99;
-        public static int OK_CODE = 0;
-        public static int LOGIN_CODE = 1;
+        public const int ERROR_CODE = 99;
+        public const int OK_CODE = 0;
+        public const int LOGIN_CODE = 1;
+
+        public static char attributeSeparator = '-';
+        public static char objectSeparator = '|';
     }
 }

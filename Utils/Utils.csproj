@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Exceptions\InvalidMessageFormatException.cs" />
     <Compile Include="Exceptions\ServerException.cs" />
     <Compile Include="Exceptions\InvalidCharactersException.cs" />
     <Compile Include="Exceptions\EmptyFieldsException.cs" />

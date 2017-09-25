@@ -49,10 +49,9 @@ namespace Utils
             return item;
         }
 
-        public static ProtocolItem SendMessage(Socket socket, ProtocolItem item)
+        public static void SendMessage(Socket socket, ProtocolItem item)
         {
             SendMessageAsProtocolItem(socket, item);
-            return RecieveMessage(socket);
         }
 
         private static void SendMessageAsProtocolItem(Socket socket, ProtocolItem item)
