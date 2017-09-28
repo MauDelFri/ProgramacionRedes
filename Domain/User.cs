@@ -22,5 +22,16 @@ namespace Domain
             this.Username = username;
             this.Password = password;
         }
+
+        public override bool Equals(object other)
+        {
+            if (other != null && other.GetType().Equals(this.GetType()))
+            {
+                return this.Username.Equals(((User)other).Username) && 
+                    this.Password.Equals(((User)other).Password);
+            }
+
+            return false;
+        }
     }
 }

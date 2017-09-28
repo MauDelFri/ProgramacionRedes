@@ -33,5 +33,17 @@ namespace Obligarorio1
             string[] objects = message.Split(Constants.objectSeparator);
             return objects.Where(o => o.Split(Constants.attributeSeparator).Count() == attributesAmount).Count() == objectsAmount;
         }
+
+        public string GetString(string data)
+        {
+            if (this.isMessageFormatValid(data, 1, 1))
+            {
+                return data;
+            }
+            else
+            {
+                throw new InvalidMessageFormatException("El formato del mensaje es incorrecto");
+            }
+        }
     }
 }

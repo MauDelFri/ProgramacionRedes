@@ -7,12 +7,14 @@ using Utils.Exceptions;
 using Utils;
 using System.Net.Sockets;
 using System.Net;
+using Domain;
 
 namespace Client
 {
     public class ClientService
     {
         private Socket socket;
+        public User user;
 
         public ClientService()
         {
@@ -39,15 +41,23 @@ namespace Client
             ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.LOGIN_CODE, dataToSend);
             SocketUtils.SendMessage(this.socket, message);
             ProtocolItem response = SocketUtils.RecieveMessage(this.socket);
-            this.OnLoginResponse(response);
+            this.ProcessResponse(response);
         }
 
-        private void OnLoginResponse(ProtocolItem response)
+        private void ProcessResponse(ProtocolItem response)
         {
             if (response.Command == Constants.ERROR_CODE)
             {
                 throw new ServerException(response.Data);
             }
+        }
+
+        public void Logout()
+        {
+            ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.LOGOUT_CODE, this.user.Username);
+            SocketUtils.SendMessage(this.socket, message);
+            ProtocolItem response = SocketUtils.RecieveMessage(this.socket);
+            this.ProcessResponse(response);
         }
     }
 }

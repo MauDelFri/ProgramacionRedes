@@ -19,6 +19,9 @@ namespace Obligarorio1
                 case Constants.LOGIN_CODE:
                     service.LoginService(message.Data);
                     break;
+                case Constants.LOGOUT_CODE:
+                    service.LogoutService(message.Data);
+                    break;
                 default:
                     break;
             }

@@ -26,7 +26,10 @@ namespace Obligarorio1
             try
             {
                 this.service.TryLogin(this.txtUsername.Text, this.txtPassword.Text);
-                //navegar home
+                Home homeForm= new Home();
+                homeForm.Tag = this;
+                homeForm.Show(this);
+                Hide();
             }
             catch (Exception exception)
             {

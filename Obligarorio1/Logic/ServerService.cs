@@ -23,15 +23,82 @@ namespace Obligarorio1
         {
             try
             {
-                User user = this.Parser.GetUser(data);
-                //TODO
-                // Como devolvemos error para que se envie al cliente???? (acordarse que la responsabilidad de enviar es el handler)
-                this.handleClient.AcknowledgeResponse();
+                this.TryLogin(data);
             }
-            catch (InvalidMessageFormatException e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 this.handleClient.ErrorResponse(e.Message);
+            }
+        }
+
+        private void TryLogin(string data)
+        {
+            User user = this.Parser.GetUser(data);
+            user = Repository.GetCompleteUser(user);
+            if (Repository.ExistsUser(user))
+            {
+                this.UserExistsAtLogin(user);
+            }
+            else
+            {
+                Repository.Users.Add(user);
+                this.LoginSuccess(user);
+            }
+        }
+
+        private void UserExistsAtLogin(User user)
+        {
+            if (Repository.AreUsersCredentialsCorrect(user))
+            {
+                if (Repository.IsUserAlreadyConnected(user))
+                {
+                    throw new UserAlreadyConnectedException("User is already connected");
+                }
+                else
+                {
+                    this.LoginSuccess(user);
+                }
+            }
+            else
+            {
+                throw new WrongUserCredentialsException("Username is already taken");
+            }
+        }
+
+        private void LoginSuccess(User user)
+        {
+            Repository.ConnectedUsers.Add(user);
+            //TODO
+            // Como devolvemos error para que se envie al cliente???? (acordarse que la responsabilidad de enviar es el handler)
+            this.handleClient.AcknowledgeResponse();
+        }
+
+        public void LogoutService(string data)
+        {
+            try
+            {
+                this.TryLogout(data);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                this.handleClient.ErrorResponse(e.Message);
+            }
+        }
+
+        private void TryLogout(string data)
+        {
+            string username = this.Parser.GetString(data);
+            User user = Repository.GetUserFromUsername(username);
+            if (Repository.IsUserAlreadyConnected(user))
+            {
+                Repository.DisconnectUser(user);
+                this.handleClient.AcknowledgeResponse();
+            }
+            else
+            {
+                throw new UserNotConnectedException("User is not connected");
             }
         }
     }

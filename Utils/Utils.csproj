@@ -41,6 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Exceptions\UserNotConnectedException.cs" />
+    <Compile Include="Exceptions\UserAlreadyConnectedException.cs" />
+    <Compile Include="Exceptions\WrongUserCredentialsException.cs" />
     <Compile Include="Exceptions\InvalidMessageFormatException.cs" />
     <Compile Include="Exceptions\ServerException.cs" />
     <Compile Include="Exceptions\InvalidCharactersException.cs" />
