@@ -15,8 +15,9 @@ namespace Utils
         public const int LOGIN_CODE = 1;
         public const int LOGOUT_CODE = 2;
         public const int CONNECTED_USERS = 3;
+        public const int GET_FRIENDS = 4;
 
-        public static char attributeSeparator = '-';
-        public static char objectSeparator = '|';
+        public static char ATTRIBUTE_SEPARATOR = '-';
+        public static char OBJECT_SEPARATOR = '|';
     }
 }

@@ -30,8 +30,8 @@ namespace Obligarorio1
 
         private bool isMessageFormatValid(string message, int attributesAmount, int objectsAmount)
         {
-            string[] objects = message.Split(Constants.objectSeparator);
-            return objects.Where(o => o.Split(Constants.attributeSeparator).Count() == attributesAmount).Count() == objectsAmount;
+            string[] objects = message.Split(Constants.OBJECT_SEPARATOR);
+            return objects.Where(o => o.Split(Constants.ATTRIBUTE_SEPARATOR).Count() == attributesAmount).Count() == objectsAmount;
         }
 
         public string GetString(string data)

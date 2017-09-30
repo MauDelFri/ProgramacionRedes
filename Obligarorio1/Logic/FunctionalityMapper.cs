@@ -23,7 +23,10 @@ namespace Obligarorio1
                     service.LogoutService(message.Data);
                     break;
                 case Constants.CONNECTED_USERS:
-                    service.LogoutService(message.Data);
+                    service.ConnectedUsers(message.Data);
+                    break;
+                case Constants.GET_FRIENDS:
+                    service.GetFriends(message.Data);
                     break;
                 default:
                     break;
