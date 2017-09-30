@@ -24,3 +24,16 @@ C:\Proyectos\programacion-de-redes\Obligarorio1\obj\Debug\Server.csprojResolveAs
 C:\Proyectos\programacion-de-redes\Obligarorio1\obj\Debug\Obligarorio1.Properties.Resources.resources
 C:\Proyectos\programacion-de-redes\Obligarorio1\obj\Debug\Server.csproj.GenerateResource.Cache
 C:\Proyectos\programacion-de-redes\Obligarorio1\obj\Debug\Obligarorio1.Home.resources
+C:\Users\Baro\ProgramacionRedes\Obligarorio1\bin\Debug\Obligarorio1.exe.config
+C:\Users\Baro\ProgramacionRedes\Obligarorio1\bin\Debug\Obligarorio1.exe
+C:\Users\Baro\ProgramacionRedes\Obligarorio1\bin\Debug\Obligarorio1.pdb
+C:\Users\Baro\ProgramacionRedes\Obligarorio1\bin\Debug\Domain.dll
+C:\Users\Baro\ProgramacionRedes\Obligarorio1\bin\Debug\Utils.dll
+C:\Users\Baro\ProgramacionRedes\Obligarorio1\bin\Debug\Domain.pdb
+C:\Users\Baro\ProgramacionRedes\Obligarorio1\bin\Debug\Utils.pdb
+C:\Users\Baro\ProgramacionRedes\Obligarorio1\obj\Debug\Server.csprojResolveAssemblyReference.cache
+C:\Users\Baro\ProgramacionRedes\Obligarorio1\obj\Debug\Obligarorio1.Home.resources
+C:\Users\Baro\ProgramacionRedes\Obligarorio1\obj\Debug\Obligarorio1.Properties.Resources.resources
+C:\Users\Baro\ProgramacionRedes\Obligarorio1\obj\Debug\Server.csproj.GenerateResource.Cache
+C:\Users\Baro\ProgramacionRedes\Obligarorio1\obj\Debug\Obligarorio1.exe
+C:\Users\Baro\ProgramacionRedes\Obligarorio1\obj\Debug\Obligarorio1.pdb

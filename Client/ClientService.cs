@@ -42,6 +42,7 @@ namespace Client
             SocketUtils.SendMessage(this.connection.GetClientSocket(), message);
             ProtocolItem response = SocketUtils.RecieveMessage(this.connection.GetClientSocket());
             this.ProcessResponse(response);
+            this.user = new User(username, password);
         }
 
         private void ProcessResponse(ProtocolItem response)
@@ -58,6 +59,7 @@ namespace Client
             SocketUtils.SendMessage(this.connection.GetClientSocket(), message);
             ProtocolItem response = SocketUtils.RecieveMessage(this.connection.GetClientSocket());
             this.ProcessResponse(response);
+            this.user = null;
         }
     }
 }

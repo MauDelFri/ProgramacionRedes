@@ -20,3 +20,17 @@ C:\Proyectos\programacion-de-redes\Client\obj\Debug\Client.csproj.GenerateResour
 C:\Proyectos\programacion-de-redes\Client\obj\Debug\Client.exe
 C:\Proyectos\programacion-de-redes\Client\obj\Debug\Client.pdb
 C:\Proyectos\programacion-de-redes\Client\obj\Debug\Client.Home.resources
+C:\Users\Baro\ProgramacionRedes\Client\bin\Debug\Client.exe.config
+C:\Users\Baro\ProgramacionRedes\Client\bin\Debug\Client.exe
+C:\Users\Baro\ProgramacionRedes\Client\bin\Debug\Client.pdb
+C:\Users\Baro\ProgramacionRedes\Client\bin\Debug\Domain.dll
+C:\Users\Baro\ProgramacionRedes\Client\bin\Debug\Utils.dll
+C:\Users\Baro\ProgramacionRedes\Client\bin\Debug\Domain.pdb
+C:\Users\Baro\ProgramacionRedes\Client\bin\Debug\Utils.pdb
+C:\Users\Baro\ProgramacionRedes\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\Baro\ProgramacionRedes\Client\obj\Debug\Client.Home.resources
+C:\Users\Baro\ProgramacionRedes\Client\obj\Debug\Obligarorio1.Login.resources
+C:\Users\Baro\ProgramacionRedes\Client\obj\Debug\Client.Properties.Resources.resources
+C:\Users\Baro\ProgramacionRedes\Client\obj\Debug\Client.csproj.GenerateResource.Cache
+C:\Users\Baro\ProgramacionRedes\Client\obj\Debug\Client.exe
+C:\Users\Baro\ProgramacionRedes\Client\obj\Debug\Client.pdb
