@@ -28,8 +28,7 @@ namespace Utils
 
             ProtocolItem item = new ProtocolItem();
             item.Header = Encoding.ASCII.GetString(headerBytes.Take(3).ToArray());
-            byte[] commandBytes = new byte[] {0, 0};
-            commandBytes.Concat(headerBytes.Skip(3).Take(2).ToArray());
+            byte[] commandBytes = headerBytes.Skip(3).Take(2).ToArray();
             item.Command = BitConverter.ToInt16(commandBytes, 0);
             item.MessageLength = BitConverter.ToInt16(headerBytes, 5);
 

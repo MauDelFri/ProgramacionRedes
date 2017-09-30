@@ -29,12 +29,12 @@ namespace Utils
 
         public byte[] GetAsByteArray()
         {
-            byte[] protocolItemByteArray = System.Text.Encoding.ASCII.GetBytes(this.Header.ToCharArray(), 0, 2);
-            protocolItemByteArray.Concat(BitConverter.GetBytes(this.Command).Skip(2));
-            protocolItemByteArray.Concat(BitConverter.GetBytes(this.MessageLength));
-            protocolItemByteArray.Concat(System.Text.Encoding.ASCII.GetBytes(this.Data));
+            List<byte> protocolItemByteArray = System.Text.Encoding.ASCII.GetBytes(this.Header.ToCharArray()).ToList();
+            protocolItemByteArray.AddRange(BitConverter.GetBytes(this.Command).Take(2));
+            protocolItemByteArray.AddRange(BitConverter.GetBytes(this.MessageLength));
+            protocolItemByteArray.AddRange(System.Text.Encoding.ASCII.GetBytes(this.Data));
 
-            return protocolItemByteArray;
+            return protocolItemByteArray.ToArray();
         }
     }
 }

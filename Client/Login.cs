@@ -26,7 +26,7 @@ namespace Obligarorio1
             try
             {
                 this.service.TryLogin(this.txtUsername.Text, this.txtPassword.Text);
-                Home homeForm= new Home();
+                Home homeForm= new Home(this.service);
                 homeForm.Tag = this;
                 homeForm.Show(this);
                 Hide();

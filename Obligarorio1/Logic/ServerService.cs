@@ -35,7 +35,6 @@ namespace Obligarorio1
         private void TryLogin(string data)
         {
             User user = this.Parser.GetUser(data);
-            user = Repository.GetCompleteUser(user);
             if (Repository.ExistsUser(user))
             {
                 this.UserExistsAtLogin(user);

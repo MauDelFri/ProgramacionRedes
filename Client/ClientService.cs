@@ -8,21 +8,21 @@ using Utils;
 using System.Net.Sockets;
 using System.Net;
 using Domain;
+using System.Threading;
 
 namespace Client
 {
     public class ClientService
     {
-        private Socket socket;
+        private Thread thread;
+        private ClientConnection connection;
         public User user;
 
         public ClientService()
         {
-            var serverIPEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6000);
-            var clientIPEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 0);
-            this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            this.socket.Bind(clientIPEndPoint);
-            this.socket.Connect(serverIPEndPoint);
+            this.connection = new ClientConnection();
+            this.thread = new Thread(() => this.connection.Connect());
+            this.thread.Start();
         }
 
         public void TryLogin(string username, string password)
@@ -39,8 +39,8 @@ namespace Client
 
             String dataToSend = username + "-" + password;
             ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.LOGIN_CODE, dataToSend);
-            SocketUtils.SendMessage(this.socket, message);
-            ProtocolItem response = SocketUtils.RecieveMessage(this.socket);
+            SocketUtils.SendMessage(this.connection.GetClientSocket(), message);
+            ProtocolItem response = SocketUtils.RecieveMessage(this.connection.GetClientSocket());
             this.ProcessResponse(response);
         }
 
@@ -55,8 +55,8 @@ namespace Client
         public void Logout()
         {
             ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.LOGOUT_CODE, this.user.Username);
-            SocketUtils.SendMessage(this.socket, message);
-            ProtocolItem response = SocketUtils.RecieveMessage(this.socket);
+            SocketUtils.SendMessage(this.connection.GetClientSocket(), message);
+            ProtocolItem response = SocketUtils.RecieveMessage(this.connection.GetClientSocket());
             this.ProcessResponse(response);
         }
     }

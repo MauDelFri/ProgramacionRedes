@@ -21,6 +21,6 @@ C:\Proyectos\programacion-de-redes\Obligarorio1\bin\Debug\Utils.dll
 C:\Proyectos\programacion-de-redes\Obligarorio1\bin\Debug\Domain.pdb
 C:\Proyectos\programacion-de-redes\Obligarorio1\bin\Debug\Utils.pdb
 C:\Proyectos\programacion-de-redes\Obligarorio1\obj\Debug\Server.csprojResolveAssemblyReference.cache
-C:\Proyectos\programacion-de-redes\Obligarorio1\obj\Debug\Obligarorio1.Login.resources
 C:\Proyectos\programacion-de-redes\Obligarorio1\obj\Debug\Obligarorio1.Properties.Resources.resources
 C:\Proyectos\programacion-de-redes\Obligarorio1\obj\Debug\Server.csproj.GenerateResource.Cache
+C:\Proyectos\programacion-de-redes\Obligarorio1\obj\Debug\Obligarorio1.Home.resources

@@ -15,10 +15,10 @@ namespace Client
     {
         private ClientService service;
 
-        public Home()
+        public Home(ClientService service)
         {
             InitializeComponent();
-            this.service = new ClientService();
+            this.service = service;
         }
 
         private void btnLogout_Click(object sender, EventArgs e)

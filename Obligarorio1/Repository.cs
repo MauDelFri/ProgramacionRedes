@@ -12,6 +12,12 @@ namespace Obligarorio1
         public static List<User> Users { get; set; }
         public static List<User> ConnectedUsers { get; set; }
 
+        public static void Initialize()
+        {
+            Users = new List<User>();
+            ConnectedUsers = new List<User>();
+        }
+
         public static bool ExistsUser(User user)
         {
             return Users.Where(u => u.Equals(user)).ToList().Count() > 0;

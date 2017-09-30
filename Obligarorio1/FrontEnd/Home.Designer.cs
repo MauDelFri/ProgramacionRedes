@@ -1,6 +1,6 @@
 ﻿namespace Obligarorio1
 {
-    partial class Login
+    partial class Home
     {
         /// <summary>
         /// Variable del diseñador necesaria.

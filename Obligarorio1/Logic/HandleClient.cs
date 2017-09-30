@@ -39,6 +39,8 @@ namespace Obligarorio1
             ProtocolItem responseMessage = new ProtocolItem();
             responseMessage.Header = Constants.RESPONSE_HEADER;
             responseMessage.Command = Constants.OK_CODE;
+
+            SocketUtils.SendMessage(this.clientSocket, responseMessage);
         }
 
         public void ErrorResponse(string errorMessage)
