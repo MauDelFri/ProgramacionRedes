@@ -67,9 +67,8 @@ namespace Obligarorio1
 
         private void LoginSuccess(User user)
         {
-            Repository.ConnectedUsers.Add(user);
-            //TODO
-            // Como devolvemos error para que se envie al cliente???? (acordarse que la responsabilidad de enviar es el handler)
+            user.TimesConnected++;
+            Repository.ConnectedSessions.Add(new Session(user));
             this.handleClient.AcknowledgeResponse();
         }
 

@@ -10,17 +10,17 @@ namespace Obligarorio1
     public static class Repository
     {
         public static List<User> Users { get; set; }
-        public static List<User> ConnectedUsers { get; set; }
+        public static List<Session> ConnectedSessions { get; set; }
 
         public static void Initialize()
         {
             Users = new List<User>();
-            ConnectedUsers = new List<User>();
+            ConnectedSessions = new List<Session>();
         }
 
         public static bool ExistsUser(User user)
         {
-            return Users.Where(u => u.Equals(user)).ToList().Count() > 0;
+            return Users.Where(u => u.Username.Equals(user.Username)).ToList().Count() > 0;
         }
 
         public static bool AreUsersCredentialsCorrect(User user)
@@ -30,7 +30,7 @@ namespace Obligarorio1
 
         public static bool IsUserAlreadyConnected(User user)
         {
-            return ConnectedUsers.Where(u => u.Equals(user)).ToList().Count() > 0;
+            return ConnectedSessions.Where(s => s.User.Equals(user)).ToList().Count() > 0;
         }
 
         public static User GetCompleteUser(User user)
@@ -43,9 +43,14 @@ namespace Obligarorio1
             return Users.Find(u => u.Username.Equals(username));
         }
 
+        public static Session GetUserSession(User user)
+        {
+            return ConnectedSessions.Find(s => s.User.Equals(user));
+        }
+
         public static void DisconnectUser(User user)
         {
-            ConnectedUsers.Remove(user);
+            ConnectedSessions.Remove(GetUserSession(user));
         }
     }
 }
