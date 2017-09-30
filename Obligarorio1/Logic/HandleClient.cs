@@ -53,5 +53,16 @@ namespace Obligarorio1
 
             SocketUtils.SendMessage(this.clientSocket, responseMessage);
         }
+
+        public void MessageResponse(string data)
+        {
+            ProtocolItem responseMessage = new ProtocolItem();
+            responseMessage.Header = Constants.RESPONSE_HEADER;
+            responseMessage.Command = Constants.OK_CODE;
+            responseMessage.Data = data;
+            responseMessage.MessageLength = System.Text.Encoding.ASCII.GetBytes(responseMessage.Data).Length;
+
+            SocketUtils.SendMessage(this.clientSocket, responseMessage);
+        }
     }
 }

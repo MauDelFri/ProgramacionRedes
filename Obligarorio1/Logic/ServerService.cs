@@ -99,5 +99,29 @@ namespace Obligarorio1
                 throw new UserNotConnectedException("User is not connected");
             }
         }
+
+        public void ConnectedUsers(string data)
+        {
+            try
+            {
+                this.TryGetConnectedUsers(data);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                this.handleClient.ErrorResponse(e.Message);
+            }
+        }
+
+        private void TryGetConnectedUsers(string data)
+        {
+            List<string> connectedUsernames = Repository.ConnectedSessions.Select(s => s.User.Username).ToList();
+            string connectedUsernamesMessage = connectedUsernames.First();
+            foreach (var item in connectedUsernames.Skip(1))
+            {
+                connectedUsernamesMessage += "-" + item;
+            }
+            this.handleClient.MessageResponse(connectedUsernamesMessage);
+        }
     }
 }
