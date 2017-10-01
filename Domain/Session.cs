@@ -12,6 +12,16 @@ namespace Domain
         public DateTime ConnectedFrom { get; set; }
         public DateTime ConnectedTo { get; set; }
 
-        public Session() { }
+        public Session(User user)
+        {
+            this.User = user;
+            this.ConnectedFrom = DateTime.Now;
+        }
+
+        public string GetElapsedTime()
+        {
+            TimeSpan span = DateTime.Now.Subtract(this.ConnectedFrom);
+            return span.Hours + ":" + span.Minutes + ":" + span.Seconds;   
+        }
     }
 }

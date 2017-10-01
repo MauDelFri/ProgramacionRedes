@@ -14,6 +14,7 @@ namespace Domain
         public List<User> Friends { get; set; }
         public List<User> PendingFriendship { get; set; }
         public List<Message> PendingMessages { get; set; }
+        public int TimesConnected { get; set; }
 
         public User() { }
 
@@ -21,6 +22,10 @@ namespace Domain
         {
             this.Username = username;
             this.Password = password;
+            this.TimesConnected = 0;
+            this.Friends = new List<User>();
+            this.PendingFriendship = new List<User>();
+            this.PendingMessages = new List<Message>();
         }
 
         public override bool Equals(object other)

@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,9 +68,8 @@ namespace Obligarorio1
 
         private void LoginSuccess(User user)
         {
-            Repository.ConnectedUsers.Add(user);
-            //TODO
-            // Como devolvemos error para que se envie al cliente???? (acordarse que la responsabilidad de enviar es el handler)
+            user.TimesConnected++;
+            Repository.ConnectedSessions.Add(new Session(user));
             this.handleClient.AcknowledgeResponse();
         }
 
@@ -99,6 +99,30 @@ namespace Obligarorio1
             {
                 throw new UserNotConnectedException("User is not connected");
             }
+        }
+
+        public void ConnectedUsers(string data)
+        {
+            try
+            {
+                this.TryGetConnectedUsers(data);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                this.handleClient.ErrorResponse(e.Message);
+            }
+        }
+
+        private void TryGetConnectedUsers(string data)
+        {
+            List<string> connectedUsernames = Repository.ConnectedSessions.Select(s => s.User.Username).ToList();
+            string connectedUsernamesMessage = connectedUsernames.First();
+            foreach (var item in connectedUsernames.Skip(1))
+            {
+                connectedUsernamesMessage += "-" + item;
+            }
+            this.handleClient.MessageResponse(connectedUsernamesMessage);
         }
     }
 }

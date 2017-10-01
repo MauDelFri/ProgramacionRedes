@@ -1,4 +1,5 @@
-﻿using Obligarorio1.Logic;
+﻿using Domain;
+using Obligarorio1.Logic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +21,26 @@ namespace Obligarorio1
         {
             InitializeComponent();
             this.logic = new ServerLogic();
+            this.listRegisteredClients.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            this.listConnectedClients.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
+        private void btnUpdateClients_Click(object sender, EventArgs e)
+        {
+            List<User> users = this.logic.GetRegisteredUsers();
+            List<ListViewItem> items = users.Select(u => new ListViewItem(new string[] { u.Username, u.Friends.Count().ToString(), u.TimesConnected.ToString() })).ToList();
+            this.listRegisteredClients.Items.Clear();
+            this.listRegisteredClients.Items.AddRange(items.ToArray());
+        }
+
+        private void btnUpdateConnected_Click(object sender, EventArgs e)
+        {
+            List<Session> sessions = this.logic.GetConnectedSessions();
+            List<ListViewItem> items = sessions.Select(s => new ListViewItem(
+                new string[] { s.User.Username, s.User.Friends.Count().ToString(),
+                    s.User.TimesConnected.ToString(), s.GetElapsedTime() })).ToList();
+            this.listConnectedClients.Items.Clear();
+            this.listConnectedClients.Items.AddRange(items.ToArray());
         }
     }
 }

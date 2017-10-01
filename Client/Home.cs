@@ -36,5 +36,20 @@ namespace Client
             }
 
         }
+
+        private void btnConnectedUsers_Click(object sender, EventArgs e)
+        {
+            string[] data = this.service.GetConnectedUsers();
+            for(int i=0; i< data.Length; i++)
+            {
+                this.listBoxConnectedUsers.Items.Add(data[i]);
+            }
+            
+        }
+
+        private void buttonMyFriends_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

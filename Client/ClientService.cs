@@ -17,9 +17,11 @@ namespace Client
         private Thread thread;
         private ClientConnection connection;
         public User user;
+        public ProtocolObjectsParser Parser;
 
         public ClientService()
         {
+            this.Parser = new ProtocolObjectsParser();
             this.connection = new ClientConnection();
             this.thread = new Thread(() => this.connection.Connect());
             this.thread.Start();
@@ -60,6 +62,15 @@ namespace Client
             ProtocolItem response = SocketUtils.RecieveMessage(this.connection.GetClientSocket());
             this.ProcessResponse(response);
             this.user = null;
+        }
+
+        public string[] GetConnectedUsers()
+        {
+            ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.CONNECTED_USERS, "");
+            SocketUtils.SendMessage(this.connection.GetClientSocket(), message);
+            ProtocolItem response = SocketUtils.RecieveMessage(this.connection.GetClientSocket());
+            this.ProcessResponse(response);
+            return Parser.GetListAttribute(response.Data);
         }
     }
 }

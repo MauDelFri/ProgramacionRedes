@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Utils;
 using Utils.Exceptions;
 
-namespace Obligarorio1
+namespace Utils
 {
     public class ProtocolObjectsParser
     {
@@ -44,6 +43,12 @@ namespace Obligarorio1
             {
                 throw new InvalidMessageFormatException("El formato del mensaje es incorrecto");
             }
+        }
+
+        public string[] GetListAttribute(string data)
+        {
+            string[] propertiesSplitted = data.Split(Constants.attributeSeparator);
+            return propertiesSplitted;
         }
     }
 }
