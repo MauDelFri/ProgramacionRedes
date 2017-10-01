@@ -255,14 +255,11 @@ namespace Obligarorio1
         {
             User user = Repository.GetUserFromUsername(dataArray[0]);
             Message message = new Message(dataArray[1], this.handleClient.CurrentSession.User, user);
+            user.PendingMessages.Add(message);
             if (Repository.IsUserConnected(user))
             {
                 HandleClient userSession = Repository.GetUserSession(user);
                 userSession.SendMessage(message.FormatToSend(), Constants.SEND_MESSAGE);
-            }
-            else
-            {
-                user.PendingMessages.Add(message);
             }
         }
     }
