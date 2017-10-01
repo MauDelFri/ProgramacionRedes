@@ -38,25 +38,25 @@ namespace Obligarorio1
 
         public void AcknowledgeResponse()
         {
-            ProtocolItem responseMessage = CreateProtocolItem(Constants.RESPONSE_HEADER, Constants.OK_CODE, "");
+            ProtocolItem responseMessage = this.CreateProtocolItem(Constants.RESPONSE_HEADER, Constants.OK_CODE, "");
             SocketUtils.SendMessage(this.clientSocket, responseMessage);
         }
 
         public void ErrorResponse(string errorMessage)
         {
-            ProtocolItem responseMessage = CreateProtocolItem(Constants.RESPONSE_HEADER, Constants.ERROR_CODE, errorMessage);
+            ProtocolItem responseMessage = this.CreateProtocolItem(Constants.RESPONSE_HEADER, Constants.ERROR_CODE, errorMessage);
             SocketUtils.SendMessage(this.clientSocket, responseMessage);
         }
 
         public void MessageResponse(string data)
         {
-            ProtocolItem responseMessage = CreateProtocolItem(Constants.RESPONSE_HEADER, Constants.OK_CODE, data);
+            ProtocolItem responseMessage = this.CreateProtocolItem(Constants.RESPONSE_HEADER, Constants.OK_CODE, data);
             SocketUtils.SendMessage(this.clientSocket, responseMessage);
         }
 
         public void SendMessage(string data, int command)
         {
-            ProtocolItem responseMessage = CreateProtocolItem(Constants.REQUEST_HEADER, command, data);
+            ProtocolItem responseMessage = this.CreateProtocolItem(Constants.REQUEST_HEADER, command, data);
             SocketUtils.SendMessage(this.clientSocket, responseMessage);
         }
 

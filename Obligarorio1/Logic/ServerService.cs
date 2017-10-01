@@ -214,7 +214,6 @@ namespace Obligarorio1
                 this.handleClient.AcknowledgeResponse();
                 if (Repository.IsUserConnected(user))
                 {
-                    ////Enviar nuevo amigo para agregar a la lista???????
                     HandleClient userSession = Repository.GetUserSession(user);
                     userSession.SendMessage(this.handleClient.CurrentSession.User.Username, Constants.FRIENDSHIP_ACCEPTED);
                 }
@@ -222,6 +221,45 @@ namespace Obligarorio1
             else
             {
                 throw new UserNotExistsException("The user does not exist");
+            }
+        }
+
+        public void SendMessage(string data)
+        {
+            try
+            {
+                this.TrySendMessage(data);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                this.handleClient.ErrorResponse(e.Message);
+            }
+        }
+
+        private void TrySendMessage(string data)
+        {
+            string[] dataArray = this.Parser.GetStringArray(data, 2);
+            if (Repository.ExistsUser(dataArray[0]))
+            {
+                this.ProcessMessage(dataArray);
+                this.handleClient.AcknowledgeResponse();
+            }
+            else
+            {
+                throw new UserNotExistsException("The user does not exist");
+            }
+        }
+
+        private void ProcessMessage(string[] dataArray)
+        {
+            User user = Repository.GetUserFromUsername(dataArray[0]);
+            Message message = new Message(dataArray[1], this.handleClient.CurrentSession.User, user);
+            user.PendingMessages.Add(message);
+            if (Repository.IsUserConnected(user))
+            {
+                HandleClient userSession = Repository.GetUserSession(user);
+                userSession.SendMessage(message.FormatToSend(), Constants.SEND_MESSAGE);
             }
         }
     }

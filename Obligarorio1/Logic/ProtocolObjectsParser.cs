@@ -28,10 +28,10 @@ namespace Obligarorio1
             }
         }
 
-        private bool isMessageFormatValid(string message, int attributesAmount, int objectsAmount)
+        private bool isMessageFormatValid(string message, int attributesCount, int objectsCount)
         {
             string[] objects = message.Split(Constants.OBJECT_SEPARATOR);
-            return objects.Where(o => o.Split(Constants.ATTRIBUTE_SEPARATOR).Count() == attributesAmount).Count() == objectsAmount;
+            return objects.Where(o => o.Split(Constants.ATTRIBUTE_SEPARATOR).Count() == attributesCount).Count() == objectsCount;
         }
 
         public string GetString(string data)
@@ -39,6 +39,18 @@ namespace Obligarorio1
             if (this.isMessageFormatValid(data, 1, 1))
             {
                 return data;
+            }
+            else
+            {
+                throw new InvalidMessageFormatException("El formato del mensaje es incorrecto");
+            }
+        }
+
+        public string[] GetStringArray(string data, int attributesCount)
+        {
+            if (this.isMessageFormatValid(data, attributesCount, 1))
+            {
+                return data.Split(Constants.ATTRIBUTE_SEPARATOR);
             }
             else
             {
