@@ -38,5 +38,10 @@ namespace Domain
 
             return false;
         }
+
+        public void RemovePendingFriendship(User user)
+        {
+            this.PendingFriendship.Remove(user);
+        }
     }
 }

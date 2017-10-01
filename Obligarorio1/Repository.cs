@@ -28,7 +28,7 @@ namespace Obligarorio1
             return Users.Find(u => u.Username.Equals(user.Username)).Password.Equals(user.Password);
         }
 
-        public static bool IsUserAlreadyConnected(User user)
+        public static bool IsUserConnected(User user)
         {
             return ConnectedClients.Where(s => s.CurrentSession.User.Equals(user)).ToList().Count() > 0;
         }

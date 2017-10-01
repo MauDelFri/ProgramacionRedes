@@ -51,7 +51,7 @@ namespace Obligarorio1
         {
             if (Repository.AreUsersCredentialsCorrect(user))
             {
-                if (Repository.IsUserAlreadyConnected(user))
+                if (Repository.IsUserConnected(user))
                 {
                     throw new UserAlreadyConnectedException("User is already connected");
                 }
@@ -92,7 +92,7 @@ namespace Obligarorio1
         {
             string username = this.Parser.GetString(data);
             User user = Repository.GetUserFromUsername(username);
-            if (Repository.IsUserAlreadyConnected(user))
+            if (Repository.IsUserConnected(user))
             {
                 Repository.DisconnectUser(user);
                 this.handleClient.AcknowledgeResponse();
@@ -176,10 +176,47 @@ namespace Obligarorio1
             {
                 User user = Repository.GetUserFromUsername(username);
                 user.PendingFriendship.Add(this.handleClient.CurrentSession.User);
-                if (Repository.IsUserAlreadyConnected(user))
+                this.handleClient.AcknowledgeResponse();
+                if (Repository.IsUserConnected(user))
                 {
                     HandleClient userSession = Repository.GetUserSession(user);
                     userSession.SendMessage(this.handleClient.CurrentSession.User.Username, Constants.SEND_FRIENDSHIP_REQUEST);
+                }
+            }
+            else
+            {
+                throw new UserNotExistsException("The user does not exist");
+            }
+        }
+
+        public void RespondFriendshipRequest(string data)
+        {
+            try
+            {
+                this.TryRespondFriendshipRequest(data);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                this.handleClient.ErrorResponse(e.Message);
+            }
+        }
+
+        private void TryRespondFriendshipRequest(string data)
+        {
+            string username = this.Parser.GetString(data);
+            if (Repository.ExistsUser(username))
+            {
+                User user = Repository.GetUserFromUsername(username);
+                user.Friends.Add(this.handleClient.CurrentSession.User);
+                this.handleClient.CurrentSession.User.Friends.Add(user);
+                this.handleClient.CurrentSession.User.RemovePendingFriendship(user);
+                this.handleClient.AcknowledgeResponse();
+                if (Repository.IsUserConnected(user))
+                {
+                    ////Enviar nuevo amigo para agregar a la lista???????
+                    HandleClient userSession = Repository.GetUserSession(user);
+                    userSession.SendMessage(this.handleClient.CurrentSession.User.Username, Constants.FRIENDSHIP_ACCEPTED);
                 }
             }
             else
