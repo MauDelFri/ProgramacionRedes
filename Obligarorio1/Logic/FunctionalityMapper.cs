@@ -25,6 +25,9 @@ namespace Obligarorio1
                 case Constants.CONNECTED_USERS:
                     service.ConnectedUsers(message.Data);
                     break;
+                case Constants.GET_FRIENDS:
+                    service.GetFriends(message.Data);
+                    break;
                 default:
                     break;
             }

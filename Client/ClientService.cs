@@ -72,5 +72,14 @@ namespace Client
             this.ProcessResponse(response);
             return Parser.GetListAttribute(response.Data);
         }
+
+        public string[] GetMyFriends()
+        {
+            ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.CONNECTED_USERS, "");
+            SocketUtils.SendMessage(this.connection.GetClientSocket(), message);
+            ProtocolItem response = SocketUtils.RecieveMessage(this.connection.GetClientSocket());
+            this.ProcessResponse(response);
+            return Parser.GetMyFriends(response.Data);
+        }
     }
 }

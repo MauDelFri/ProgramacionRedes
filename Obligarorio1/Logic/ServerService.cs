@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utils;
 using Utils.Exceptions;
 
 namespace Obligarorio1
 {
     public class ServerService
     {
+        private User loggedUser;
         public ProtocolObjectsParser Parser;
         private HandleClient handleClient;
 
@@ -57,6 +59,7 @@ namespace Obligarorio1
                 }
                 else
                 {
+                    user = Repository.GetUserFromUsername(user.Username);
                     this.LoginSuccess(user);
                 }
             }
@@ -69,6 +72,7 @@ namespace Obligarorio1
         private void LoginSuccess(User user)
         {
             user.TimesConnected++;
+            this.loggedUser = user;
             Repository.ConnectedSessions.Add(new Session(user));
             this.handleClient.AcknowledgeResponse();
         }
@@ -120,9 +124,38 @@ namespace Obligarorio1
             string connectedUsernamesMessage = connectedUsernames.First();
             foreach (var item in connectedUsernames.Skip(1))
             {
-                connectedUsernamesMessage += "-" + item;
+                connectedUsernamesMessage += Constants.ATTRIBUTE_SEPARATOR + item;
             }
             this.handleClient.MessageResponse(connectedUsernamesMessage);
+        }
+
+        public void GetFriends(string data)
+        {
+            try
+            {
+                this.TryGetFriends();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                this.handleClient.ErrorResponse(e.Message);
+            }
+        }
+
+        private void TryGetFriends()
+        {
+            string friends = "";
+            foreach (var item in this.loggedUser.Friends)
+            {
+                friends += item.Username + Constants.ATTRIBUTE_SEPARATOR + item.Friends.Count + Constants.OBJECT_SEPARATOR;
+            }
+
+            if (!String.IsNullOrEmpty(friends) && friends.EndsWith(Constants.OBJECT_SEPARATOR + ""))
+            {
+                friends = friends.Substring(0, friends.Count() - 1);
+            }
+
+            this.handleClient.MessageResponse(friends);
         }
     }
 }

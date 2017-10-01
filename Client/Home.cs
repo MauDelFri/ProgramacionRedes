@@ -49,7 +49,11 @@ namespace Client
 
         private void buttonMyFriends_Click(object sender, EventArgs e)
         {
-
+            string[] data = this.service.GetMyFriends();
+            for (int i = 0; i < data.Length; i++)
+            {
+                this.listBoxConnectedUsers.Items.Add(data[i]);
+            }
         }
     }
 }
