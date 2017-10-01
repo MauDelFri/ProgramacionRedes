@@ -34,6 +34,9 @@ namespace Obligarorio1
                 case Constants.RESPOND_FRIENDSHIP_REQUEST:
                     service.RespondFriendshipRequest(message.Data);
                     break;
+                case Constants.SEND_MESSAGE:
+                    service.SendMessage(message.Data);
+                    break;
                 default:
                     break;
             }
