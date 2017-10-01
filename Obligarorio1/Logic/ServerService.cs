@@ -352,5 +352,34 @@ namespace Obligarorio1
 
             return pendingFriendshipsData;
         }
+
+        public void MessageRead(string data)
+        {
+            try
+            {
+                this.TryMessageRead(data);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                this.handleClient.ErrorResponse(e.Message);
+            }
+        }
+
+        private void TryMessageRead(string data)
+        {
+            string[] messageData = this.Parser.GetStringArray(data, 2);
+            Message messageRead = this.handleClient.CurrentSession.User.PendingMessages.
+                Find(m => m.Sender.Username.Equals(messageData[0]) && m.Date.ToString().Equals(messageData[1]));
+            if (messageRead != null)
+            {
+                this.handleClient.CurrentSession.User.PendingMessages.Remove(messageRead);
+                this.handleClient.AcknowledgeResponse();
+            }
+            else
+            {
+                throw new MessageNotPendingException("There is not pending message with those parameters");
+            }
+        }
     }
 }

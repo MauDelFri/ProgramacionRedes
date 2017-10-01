@@ -37,6 +37,9 @@ namespace Obligarorio1
                 case Constants.SEND_MESSAGE:
                     service.SendMessage(message.Data);
                     break;
+                case Constants.MESSAGE_READ:
+                    service.MessageRead(message.Data);
+                    break;
                 case Constants.GET_PENDING_FRIENDSHIPS:
                     service.GetPendingFriendships(message.Data);
                     break;

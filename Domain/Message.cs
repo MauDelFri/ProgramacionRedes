@@ -24,7 +24,7 @@ namespace Domain
 
         public string FormatToSend()
         {
-            return this.Sender.Username + Constants.ATTRIBUTE_SEPARATOR + this.Date.ToString("dd/MM/yyyy HH:mm:ss") + 
+            return this.Sender.Username + Constants.ATTRIBUTE_SEPARATOR + this.Date.ToString(Constants.DATE_FORMAT) + 
                 Constants.ATTRIBUTE_SEPARATOR + this.Text;
         }
     }

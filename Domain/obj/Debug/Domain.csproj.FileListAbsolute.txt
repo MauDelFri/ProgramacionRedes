@@ -8,3 +8,5 @@ C:\Proyectos\programacion-de-redes\Domain\bin\Debug\Domain.pdb
 C:\Proyectos\programacion-de-redes\Domain\obj\Debug\Domain.csprojResolveAssemblyReference.cache
 C:\Proyectos\programacion-de-redes\Domain\obj\Debug\Domain.dll
 C:\Proyectos\programacion-de-redes\Domain\obj\Debug\Domain.pdb
+C:\Proyectos\programacion-de-redes\Domain\bin\Debug\Utils.dll
+C:\Proyectos\programacion-de-redes\Domain\bin\Debug\Utils.pdb

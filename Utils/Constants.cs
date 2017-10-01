@@ -8,8 +8,8 @@ namespace Utils
 {
     public static class Constants
     {
-        public static string REQUEST_HEADER = "REQ";
-        public static string RESPONSE_HEADER = "RES";
+        public const string REQUEST_HEADER = "REQ";
+        public const string RESPONSE_HEADER = "RES";
         public const int ERROR_CODE = 99;
         public const int OK_CODE = 0;
         public const int LOGIN_CODE = 1;
@@ -20,10 +20,12 @@ namespace Utils
         public const int RESPOND_FRIENDSHIP_REQUEST = 6;
         public const int FRIENDSHIP_ACCEPTED = 7;
         public const int SEND_MESSAGE = 8;
-        public const int GET_PENDING_FRIENDSHIPS = 9;
-        public const int GET_PENDING_MESSAGES = 10;
+        public const int MESSAGE_READ = 9;
+        public const int GET_PENDING_FRIENDSHIPS = 10;
+        public const int GET_PENDING_MESSAGES = 11;
 
-        public static char ATTRIBUTE_SEPARATOR = '-';
-        public static char OBJECT_SEPARATOR = '|';
+        public const char ATTRIBUTE_SEPARATOR = '-';
+        public const char OBJECT_SEPARATOR = '|';
+        public const string DATE_FORMAT = "dd/MM/yyyy HH:mm:ss";
     }
 }
