@@ -204,23 +204,31 @@ namespace Obligarorio1
 
         private void TryRespondFriendshipRequest(string data)
         {
-            string username = this.Parser.GetString(data);
-            if (Repository.ExistsUser(username))
+            string[] dataArray = this.Parser.GetStringArray(data, 2);
+            if (Repository.ExistsUser(dataArray[0]))
             {
-                User user = Repository.GetUserFromUsername(username);
-                user.Friends.Add(this.handleClient.CurrentSession.User);
-                this.handleClient.CurrentSession.User.Friends.Add(user);
+                User user = Repository.GetUserFromUsername(dataArray[0]);
                 this.handleClient.CurrentSession.User.RemovePendingFriendship(user);
                 this.handleClient.AcknowledgeResponse();
+                this.ProcessFriendshipResponseAction(dataArray, user);
+            }
+            else
+            {
+                throw new UserNotExistsException("The user does not exist");
+            }
+        }
+
+        private void ProcessFriendshipResponseAction(string[] dataArray, User user)
+        {
+            if (dataArray[1].Equals(Constants.ACCEPT_FRIENDSHIP_ACTION))
+            {
+                user.Friends.Add(this.handleClient.CurrentSession.User);
+                this.handleClient.CurrentSession.User.Friends.Add(user);
                 if (Repository.IsUserConnected(user))
                 {
                     HandleClient userSession = Repository.GetUserSession(user);
                     userSession.SendMessage(this.handleClient.CurrentSession.User.Username, Constants.FRIENDSHIP_ACCEPTED);
                 }
-            }
-            else
-            {
-                throw new UserNotExistsException("The user does not exist");
             }
         }
 
