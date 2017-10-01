@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Utils.Exceptions
 {
-    public class UserAlreadyConnectedException : Exception 
+    public class UserAlreadyConnectedException : ServerException 
     {
-        public UserAlreadyConnectedException()
-        {
-
-        }
+        public UserAlreadyConnectedException() : base("User is already connected") { }
 
         public UserAlreadyConnectedException(string message) : base(message) { }
     }

@@ -8,10 +8,7 @@ namespace Utils.Exceptions
 {
     public class ServerException : Exception 
     {
-        public ServerException()
-        {
-
-        }
+        public ServerException() : base("An error ocurr on the server") { }
 
         public ServerException(string message) : base(message) { }
     }

@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Utils.Exceptions
 {
-    public class UserNotExistsException : Exception 
+    public class UserNotExistsException : ServerException 
     {
-        public UserNotExistsException()
-        {
-
-        }
+        public UserNotExistsException() : base("The user does not exist") { }
 
         public UserNotExistsException(string message) : base(message) { }
     }

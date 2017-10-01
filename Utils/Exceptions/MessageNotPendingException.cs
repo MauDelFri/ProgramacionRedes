@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Utils.Exceptions
 {
-    public class MessageNotPendingException : Exception 
+    public class MessageNotPendingException : ServerException 
     {
-        public MessageNotPendingException()
-        {
-
-        }
+        public MessageNotPendingException() : base("There is not pending message with those parameters") { }
 
         public MessageNotPendingException(string message) : base(message) { }
     }

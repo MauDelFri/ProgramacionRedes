@@ -29,12 +29,12 @@ namespace Client
         {
             if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
             {
-                throw new EmptyFieldsException("Complete all fileds");
+                throw new EmptyFieldsException();
             }
 
             if (username.Contains("-") || password.Contains("-"))
             {
-                throw new InvalidCharactersException("The fields can not contain '-'");
+                throw new InvalidCharactersException();
             }
 
             String dataToSend = username + "-" + password;

@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Utils.Exceptions
 {
-    public class InvalidCharactersException : Exception 
+    public class InvalidCharactersException : ServerException 
     {
-        public InvalidCharactersException()
-        {
-
-        }
+        public InvalidCharactersException() : base("The fields can not contain '-'") { }
 
         public InvalidCharactersException(string message) : base(message) { }
     }

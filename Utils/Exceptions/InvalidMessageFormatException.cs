@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Utils.Exceptions
 {
-    public class InvalidMessageFormatException : Exception 
+    public class InvalidMessageFormatException : ServerException 
     {
-        public InvalidMessageFormatException()
-        {
-
-        }
+        public InvalidMessageFormatException() : base("El formato del mensaje es incorrecto") { }
 
         public InvalidMessageFormatException(string message) : base(message) { }
     }

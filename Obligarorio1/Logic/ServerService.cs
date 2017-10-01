@@ -53,7 +53,7 @@ namespace Obligarorio1
             {
                 if (Repository.IsUserConnected(user))
                 {
-                    throw new UserAlreadyConnectedException("User is already connected");
+                    throw new UserAlreadyConnectedException();
                 }
                 else
                 {
@@ -63,7 +63,7 @@ namespace Obligarorio1
             }
             else
             {
-                throw new WrongUserCredentialsException("Username is already taken");
+                throw new WrongUserCredentialsException();
             }
         }
 
@@ -99,7 +99,7 @@ namespace Obligarorio1
             }
             else
             {
-                throw new UserNotConnectedException("User is not connected");
+                throw new UserNotConnectedException();
             }
         }
 
@@ -185,7 +185,7 @@ namespace Obligarorio1
             }
             else
             {
-                throw new UserNotExistsException("The user does not exist");
+                throw new UserNotExistsException();
             }
         }
 
@@ -214,7 +214,7 @@ namespace Obligarorio1
             }
             else
             {
-                throw new UserNotExistsException("The user does not exist");
+                throw new UserNotExistsException();
             }
         }
 
@@ -255,7 +255,7 @@ namespace Obligarorio1
             }
             else
             {
-                throw new UserNotExistsException("The user does not exist");
+                throw new UserNotExistsException();
             }
         }
 
@@ -296,7 +296,7 @@ namespace Obligarorio1
             }
             else
             {
-                throw new UserNotExistsException("The user does not exist");
+                throw new UserNotExistsException();
             }
         }
 
@@ -341,7 +341,7 @@ namespace Obligarorio1
             }
             else
             {
-                throw new UserNotExistsException("The user does not exist");
+                throw new UserNotExistsException();
             }
         }
 
@@ -386,7 +386,7 @@ namespace Obligarorio1
             }
             else
             {
-                throw new MessageNotPendingException("There is not pending message with those parameters");
+                throw new MessageNotPendingException();
             }
         }
     }

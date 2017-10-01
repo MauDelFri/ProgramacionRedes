@@ -24,7 +24,7 @@ namespace Obligarorio1
             }
             else
             {
-                throw new InvalidMessageFormatException("El formato del mensaje es incorrecto");
+                throw new InvalidMessageFormatException();
             }
         }
 
@@ -42,7 +42,7 @@ namespace Obligarorio1
             }
             else
             {
-                throw new InvalidMessageFormatException("El formato del mensaje es incorrecto");
+                throw new InvalidMessageFormatException();
             }
         }
 
@@ -54,7 +54,7 @@ namespace Obligarorio1
             }
             else
             {
-                throw new InvalidMessageFormatException("El formato del mensaje es incorrecto");
+                throw new InvalidMessageFormatException();
             }
         }
     }

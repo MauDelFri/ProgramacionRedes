@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Utils.Exceptions
 {
-    public class WrongUserCredentialsException : Exception 
+    public class WrongUserCredentialsException : ServerException 
     {
-        public WrongUserCredentialsException()
-        {
-
-        }
+        public WrongUserCredentialsException() : base("Username is already taken") { }
 
         public WrongUserCredentialsException(string message) : base(message) { }
     }
