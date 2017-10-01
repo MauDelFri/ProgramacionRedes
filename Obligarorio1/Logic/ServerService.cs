@@ -150,7 +150,7 @@ namespace Obligarorio1
 
             if (!String.IsNullOrEmpty(friends) && friends.EndsWith(Constants.OBJECT_SEPARATOR + ""))
             {
-                friends = friends.Substring(0, friends.Count() - 1);
+                friends = friends.Substring(0, friends.Length - 1);
             }
 
             this.handleClient.MessageResponse(friends);
@@ -242,7 +242,7 @@ namespace Obligarorio1
             string[] dataArray = this.Parser.GetStringArray(data, 2);
             if (Repository.ExistsUser(dataArray[0]))
             {
-                this.ProcessMessage(dataArray);
+                this.ProcessMessageToSend(dataArray);
                 this.handleClient.AcknowledgeResponse();
             }
             else
@@ -251,7 +251,7 @@ namespace Obligarorio1
             }
         }
 
-        private void ProcessMessage(string[] dataArray)
+        private void ProcessMessageToSend(string[] dataArray)
         {
             User user = Repository.GetUserFromUsername(dataArray[0]);
             Message message = new Message(dataArray[1], this.handleClient.CurrentSession.User, user);
@@ -261,6 +261,96 @@ namespace Obligarorio1
                 HandleClient userSession = Repository.GetUserSession(user);
                 userSession.SendMessage(message.FormatToSend(), Constants.SEND_MESSAGE);
             }
+        }
+
+        public void GetPendingMessages(string data)
+        {
+            try
+            {
+                this.TryGetPendingMessages(data);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                this.handleClient.ErrorResponse(e.Message);
+            }
+        }
+
+        private void TryGetPendingMessages(string data)
+        {
+            string username = this.Parser.GetString(data);
+            if (Repository.ExistsUser(username))
+            {
+                User user = Repository.GetUserFromUsername(username);
+                List<Message> pendingMessages = user.PendingMessages;
+                string pendingMessagesData = this.GetPendingMessagesToSend(pendingMessages);
+                this.handleClient.MessageResponse(pendingMessagesData);
+            }
+            else
+            {
+                throw new UserNotExistsException("The user does not exist");
+            }
+        }
+
+        private string GetPendingMessagesToSend(List<Message> pendingMessages)
+        {
+            string pendingMessagesData = "";
+            foreach (var item in pendingMessages)
+            {
+                pendingMessagesData += item.FormatToSend() + Constants.OBJECT_SEPARATOR;
+            }
+
+            if (pendingMessagesData.EndsWith(Constants.OBJECT_SEPARATOR + ""))
+            {
+                pendingMessagesData = pendingMessagesData.Substring(0, pendingMessagesData.Length);
+            }
+
+            return pendingMessagesData;
+        }
+
+        public void GetPendingFriendships(string data)
+        {
+            try
+            {
+                this.TryGetPendingFriendships(data);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                this.handleClient.ErrorResponse(e.Message);
+            }
+        }
+
+        private void TryGetPendingFriendships(string data)
+        {
+            string username = this.Parser.GetString(data);
+            if (Repository.ExistsUser(username))
+            {
+                User user = Repository.GetUserFromUsername(username);
+                List<User> pendingFriendships = user.PendingFriendship;
+                string pendingFriendshipsData = this.GetPendingFriendshipsToSend(pendingFriendships);
+                this.handleClient.MessageResponse(pendingFriendshipsData);
+            }
+            else
+            {
+                throw new UserNotExistsException("The user does not exist");
+            }
+        }
+
+        private string GetPendingFriendshipsToSend(List<User> pendingFriendships)
+        {
+            string pendingFriendshipsData = "";
+            foreach (var item in pendingFriendships)
+            {
+                pendingFriendshipsData += item.Username + Constants.OBJECT_SEPARATOR;
+            }
+
+            if (pendingFriendshipsData.EndsWith(Constants.OBJECT_SEPARATOR + ""))
+            {
+                pendingFriendshipsData = pendingFriendshipsData.Substring(0, pendingFriendshipsData.Length);
+            }
+
+            return pendingFriendshipsData;
         }
     }
 }

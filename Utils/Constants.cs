@@ -20,6 +20,8 @@ namespace Utils
         public const int RESPOND_FRIENDSHIP_REQUEST = 6;
         public const int FRIENDSHIP_ACCEPTED = 7;
         public const int SEND_MESSAGE = 8;
+        public const int GET_PENDING_FRIENDSHIPS = 9;
+        public const int GET_PENDING_MESSAGES = 10;
 
         public static char ATTRIBUTE_SEPARATOR = '-';
         public static char OBJECT_SEPARATOR = '|';
