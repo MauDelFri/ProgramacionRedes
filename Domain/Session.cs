@@ -10,7 +10,6 @@ namespace Domain
     {
         public User User { get; set; }
         public DateTime ConnectedFrom { get; set; }
-        public DateTime ConnectedTo { get; set; }
 
         public Session(User user)
         {

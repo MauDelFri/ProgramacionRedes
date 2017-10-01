@@ -11,7 +11,6 @@ namespace Obligarorio1
 {
     public class ServerService
     {
-        private User loggedUser;
         public ProtocolObjectsParser Parser;
         private HandleClient handleClient;
 
@@ -37,7 +36,7 @@ namespace Obligarorio1
         private void TryLogin(string data)
         {
             User user = this.Parser.GetUser(data);
-            if (Repository.ExistsUser(user))
+            if (Repository.ExistsUser(user.Username))
             {
                 this.UserExistsAtLogin(user);
             }
@@ -71,8 +70,8 @@ namespace Obligarorio1
         private void LoginSuccess(User user)
         {
             user.TimesConnected++;
-            this.loggedUser = user;
-            Repository.ConnectedSessions.Add(new Session(user));
+            this.handleClient.CurrentSession = new Session(user);
+            Repository.ConnectedClients.Add(this.handleClient);
             this.handleClient.AcknowledgeResponse();
         }
 
@@ -119,7 +118,7 @@ namespace Obligarorio1
 
         private void TryGetConnectedUsers(string data)
         {
-            List<string> connectedUsernames = Repository.ConnectedSessions.Select(s => s.User.Username).ToList();
+            List<string> connectedUsernames = Repository.ConnectedClients.Select(s => s.CurrentSession.User.Username).ToList();
             string connectedUsernamesMessage = connectedUsernames.First();
             foreach (var item in connectedUsernames.Skip(1))
             {
@@ -144,7 +143,7 @@ namespace Obligarorio1
         private void TryGetFriends()
         {
             string friends = "";
-            foreach (var item in this.loggedUser.Friends)
+            foreach (var item in this.handleClient.CurrentSession.User.Friends)
             {
                 friends += item.Username + Constants.ATTRIBUTE_SEPARATOR + item.Friends.Count + Constants.OBJECT_SEPARATOR;
             }
@@ -155,6 +154,38 @@ namespace Obligarorio1
             }
 
             this.handleClient.MessageResponse(friends);
+        }
+
+        public void SendFriendshipRequest(string data)
+        {
+            try
+            {
+                this.TrySendFriendshipRequest(data);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                this.handleClient.ErrorResponse(e.Message);
+            }
+        }
+
+        private void TrySendFriendshipRequest(string data)
+        {
+            string username = this.Parser.GetString(data);
+            if (Repository.ExistsUser(username))
+            {
+                User user = Repository.GetUserFromUsername(username);
+                user.PendingFriendship.Add(this.handleClient.CurrentSession.User);
+                if (Repository.IsUserAlreadyConnected(user))
+                {
+                    HandleClient userSession = Repository.GetUserSession(user);
+                    userSession.SendMessage(this.handleClient.CurrentSession.User.Username, Constants.SEND_FRIENDSHIP_REQUEST);
+                }
+            }
+            else
+            {
+                throw new UserNotExistsException("The user does not exist");
+            }
         }
     }
 }

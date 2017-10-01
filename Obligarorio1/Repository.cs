@@ -10,17 +10,17 @@ namespace Obligarorio1
     public static class Repository
     {
         public static List<User> Users { get; set; }
-        public static List<Session> ConnectedSessions { get; set; }
+        public static List<HandleClient> ConnectedClients { get; set; }
 
         public static void Initialize()
         {
             Users = new List<User>();
-            ConnectedSessions = new List<Session>();
+            ConnectedClients = new List<HandleClient>();
         }
 
-        public static bool ExistsUser(User user)
+        public static bool ExistsUser(string username)
         {
-            return Users.Where(u => u.Username.Equals(user.Username)).ToList().Count() > 0;
+            return Users.Where(u => u.Username.Equals(username)).ToList().Count() > 0;
         }
 
         public static bool AreUsersCredentialsCorrect(User user)
@@ -30,7 +30,7 @@ namespace Obligarorio1
 
         public static bool IsUserAlreadyConnected(User user)
         {
-            return ConnectedSessions.Where(s => s.User.Equals(user)).ToList().Count() > 0;
+            return ConnectedClients.Where(s => s.CurrentSession.User.Equals(user)).ToList().Count() > 0;
         }
 
         public static User GetCompleteUser(User user)
@@ -43,14 +43,14 @@ namespace Obligarorio1
             return Users.Find(u => u.Username.Equals(username));
         }
 
-        public static Session GetUserSession(User user)
+        public static HandleClient GetUserSession(User user)
         {
-            return ConnectedSessions.Find(s => s.User.Equals(user));
+            return ConnectedClients.Find(s => s.CurrentSession.User.Equals(user));
         }
 
         public static void DisconnectUser(User user)
         {
-            ConnectedSessions.Remove(GetUserSession(user));
+            ConnectedClients.Remove(GetUserSession(user));
         }
     }
 }
