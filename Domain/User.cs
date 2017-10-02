@@ -59,7 +59,7 @@ namespace Domain
 
         public override string ToString()
         {
-            return this.Username;
+            return this.Username + "-" + this.Friends.Count;
         }
     }
 }

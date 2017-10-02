@@ -29,7 +29,7 @@ namespace Obligarorio1
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.LOGIN_CODE, Constants.ERROR_CODE + e.Message);
+                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.LOGIN_CODE, Constants.ERROR_RESPONSE + e.Message);
             }
         }
 
@@ -86,7 +86,7 @@ namespace Obligarorio1
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.LOGOUT_CODE, Constants.ERROR_CODE + e.Message);
+                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.LOGOUT_CODE, Constants.ERROR_RESPONSE + e.Message);
             }
         }
 
@@ -114,7 +114,7 @@ namespace Obligarorio1
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.CONNECTED_USERS, Constants.ERROR_CODE + e.Message);
+                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.CONNECTED_USERS, Constants.ERROR_RESPONSE + e.Message);
             }
         }
 
@@ -138,7 +138,7 @@ namespace Obligarorio1
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.GET_FRIENDS, Constants.ERROR_CODE + e.Message);
+                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.GET_FRIENDS, Constants.ERROR_RESPONSE + e.Message);
             }
         }
 
@@ -167,7 +167,7 @@ namespace Obligarorio1
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.SEND_FRIENDSHIP_REQUEST, Constants.ERROR_CODE + e.Message);
+                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.SEND_FRIENDSHIP_REQUEST, Constants.ERROR_RESPONSE + e.Message);
             }
         }
 
@@ -192,9 +192,11 @@ namespace Obligarorio1
                     this.handleClient.CurrentSession.User.Friends.Add(user);
                     user.Friends.Add(this.handleClient.CurrentSession.User);
                     this.handleClient.CurrentSession.User.RemovePendingFriendship(user);
-                    this.handleClient.SendMessage(Constants.REQUEST_HEADER, Constants.FRIENDSHIP_ACCEPTED, user.Username);
+                    this.handleClient.SendMessage(Constants.REQUEST_HEADER, Constants.FRIENDSHIP_ACCEPTED, user.Username + Constants.ATTRIBUTE_SEPARATOR + user.Friends.Count);
                     HandleClient userSession = Repository.GetUserSession(user);
-                    userSession.SendMessage(Constants.REQUEST_HEADER, Constants.FRIENDSHIP_ACCEPTED, this.handleClient.CurrentSession.User.Username);
+                    userSession.SendMessage(Constants.REQUEST_HEADER, Constants.FRIENDSHIP_ACCEPTED,
+                        this.handleClient.CurrentSession.User.Username + Constants.ATTRIBUTE_SEPARATOR +
+                        this.handleClient.CurrentSession.User.Friends.Count);
                 }
                 else
                 {
@@ -222,7 +224,7 @@ namespace Obligarorio1
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.RESPOND_FRIENDSHIP_REQUEST, Constants.ERROR_CODE + e.Message);
+                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.RESPOND_FRIENDSHIP_REQUEST, Constants.ERROR_RESPONSE + e.Message);
             }
         }
 
@@ -244,16 +246,15 @@ namespace Obligarorio1
 
         private void ProcessFriendshipResponseAction(string[] dataArray, User user)
         {
-            //if (dataArray[1].Equals(Constants.ACCEPT_FRIENDSHIP_ACTION))
-            //{
-                user.Friends.Add(this.handleClient.CurrentSession.User);
-                this.handleClient.CurrentSession.User.Friends.Add(user);
-                if (Repository.IsUserConnected(user))
-                {
-                    HandleClient userSession = Repository.GetUserSession(user);
-                    userSession.SendMessage(Constants.REQUEST_HEADER, Constants.FRIENDSHIP_ACCEPTED, this.handleClient.CurrentSession.User.Username);
-                }
-            //}
+            user.Friends.Add(this.handleClient.CurrentSession.User);
+            this.handleClient.CurrentSession.User.Friends.Add(user);
+            if (Repository.IsUserConnected(user))
+            {
+                HandleClient userSession = Repository.GetUserSession(user);
+                userSession.SendMessage(Constants.REQUEST_HEADER, Constants.FRIENDSHIP_ACCEPTED, 
+                    this.handleClient.CurrentSession.User.Username + Constants.ATTRIBUTE_SEPARATOR + 
+                    this.handleClient.CurrentSession.User.Friends.Count);
+            }
         }
 
         public void SendMessage(string data)
@@ -265,7 +266,7 @@ namespace Obligarorio1
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.SEND_MESSAGE, Constants.ERROR_CODE + e.Message);
+                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.SEND_MESSAGE, Constants.ERROR_RESPONSE + e.Message);
             }
         }
 
@@ -304,7 +305,7 @@ namespace Obligarorio1
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.GET_PENDING_MESSAGES, Constants.ERROR_CODE + e.Message);
+                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.GET_PENDING_MESSAGES, Constants.ERROR_RESPONSE + e.Message);
             }
         }
 
@@ -334,7 +335,7 @@ namespace Obligarorio1
 
             if (pendingMessagesData.EndsWith(Constants.OBJECT_SEPARATOR + ""))
             {
-                pendingMessagesData = pendingMessagesData.Substring(0, pendingMessagesData.Length);
+                pendingMessagesData = pendingMessagesData.Substring(0, pendingMessagesData.Length - 1);
             }
 
             return pendingMessagesData;
@@ -349,7 +350,7 @@ namespace Obligarorio1
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.GET_PENDING_FRIENDSHIPS, Constants.ERROR_CODE + e.Message);
+                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.GET_PENDING_FRIENDSHIPS, Constants.ERROR_RESPONSE + e.Message);
             }
         }
 
@@ -394,7 +395,7 @@ namespace Obligarorio1
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.MESSAGE_READ, Constants.ERROR_CODE + e.Message);
+                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.MESSAGE_READ, Constants.ERROR_RESPONSE + e.Message);
             }
         }
 

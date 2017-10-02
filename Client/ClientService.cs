@@ -72,6 +72,12 @@ namespace Client
             SocketUtils.SendMessage(Store.GetInstance().socket, message);
         }
 
+        public void GetPendingMessages()
+        {
+            ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.GET_PENDING_MESSAGES, Store.GetInstance().user.Username);
+            SocketUtils.SendMessage(Store.GetInstance().socket, message);
+        }
+
         public void AddFriend(string username)
         {
             ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.SEND_FRIENDSHIP_REQUEST, username);
@@ -112,7 +118,7 @@ namespace Client
             }
             else
             {
-                Store.GetInstance().FriendshipAcceptedState.OnNext(Parser.GetString(data));
+                Store.GetInstance().FriendshipAcceptedState.OnNext(data);
             }
         }
 
@@ -160,8 +166,11 @@ namespace Client
             }
             else
             {
-                List<Message> messages = Parser.GetMessages(data).Select(m => new Message(new User(m[0]), m[1], m[2])).ToList();
-                Store.GetInstance().PendingMessagesState.OnNext(messages);
+                if (!String.IsNullOrEmpty(data))
+                {
+                    List<Message> messages = Parser.GetMessages(data).Select(m => new Message(new User(m[0]), m[1], m[2])).ToList();
+                    Store.GetInstance().PendingMessagesState.OnNext(messages);
+                }
             }
         }
 

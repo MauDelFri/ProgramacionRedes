@@ -34,6 +34,7 @@ namespace Client
             Store.GetInstance().ReceiveFriendshipRequestsState.Subscribe(data => this.OnReceiveFriendshipRequestSuccess(data), error => this.OnServiceCallError(error.Message));
             Store.GetInstance().ReceiveMessagesState.Subscribe(data => this.OnReceiveMessageSuccess(data), error => this.OnServiceCallError(error.Message));
             Store.GetInstance().FriendshipAcceptedState.Subscribe(data => this.OnFriendshipAcceptedSuccess(data), error => this.OnServiceCallError(error.Message));
+            this.service.GetPendingMessages();
         }
 
         #region Observables server response
@@ -44,9 +45,8 @@ namespace Client
             {
                 this.Invoke(new Action(() =>
                 {
-                    Store.GetInstance().user.Friends.Add(new User(data));
                     this.listBoxMyFriends.Items.Clear();
-                    this.listBoxMyFriends.Items.AddRange(Store.GetInstance().user.Friends.ToArray());
+                    this.listBoxMyFriends.Items.Add(data);
                 }));
             }
         }
