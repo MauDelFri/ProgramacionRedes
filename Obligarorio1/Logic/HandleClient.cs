@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
+using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
 using Utils;
@@ -14,11 +15,14 @@ namespace Obligarorio1
         private FunctionalityMapper mapper;
         private Socket clientSocket;
         public Session CurrentSession { get; set; }
+        public ReplaySubject<ProtocolItem> PendingMessage { get; set; }
 
         public HandleClient(Socket clientSocket)
         {
             this.clientSocket = clientSocket;
             this.mapper = new FunctionalityMapper();
+            this.PendingMessage = new ReplaySubject<ProtocolItem>();
+            this.PendingMessage.Subscribe(message => this.OnPendingMessageSend(message));
 
             while (true)
             {
@@ -36,27 +40,9 @@ namespace Obligarorio1
             clientSocket.Close();
         }
 
-        public void AcknowledgeResponse()
+        public void SendMessage(string header, int command, string data)
         {
-            ProtocolItem responseMessage = this.CreateProtocolItem(Constants.RESPONSE_HEADER, Constants.OK_CODE, "");
-            SocketUtils.SendMessage(this.clientSocket, responseMessage);
-        }
-
-        public void ErrorResponse(string errorMessage)
-        {
-            ProtocolItem responseMessage = this.CreateProtocolItem(Constants.RESPONSE_HEADER, Constants.ERROR_CODE, errorMessage);
-            SocketUtils.SendMessage(this.clientSocket, responseMessage);
-        }
-
-        public void MessageResponse(string data)
-        {
-            ProtocolItem responseMessage = this.CreateProtocolItem(Constants.RESPONSE_HEADER, Constants.OK_CODE, data);
-            SocketUtils.SendMessage(this.clientSocket, responseMessage);
-        }
-
-        public void SendMessage(string data, int command)
-        {
-            ProtocolItem responseMessage = this.CreateProtocolItem(Constants.REQUEST_HEADER, command, data);
+            ProtocolItem responseMessage = this.CreateProtocolItem(header, command, data);
             SocketUtils.SendMessage(this.clientSocket, responseMessage);
         }
 
@@ -69,6 +55,11 @@ namespace Obligarorio1
             responseMessage.MessageLength = System.Text.Encoding.ASCII.GetBytes(responseMessage.Data).Length;
 
             return responseMessage;
+        }
+
+        private void OnPendingMessageSend(ProtocolItem message)
+        {
+            SocketUtils.SendMessage(this.clientSocket, message);
         }
     }
 }
