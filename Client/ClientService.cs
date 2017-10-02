@@ -108,6 +108,12 @@ namespace Client
             SocketUtils.SendMessage(Store.GetInstance().socket, messageItem);
         }
 
+        public void Disconnect()
+        {
+            ProtocolItem messageItem = new ProtocolItem(Constants.REQUEST_HEADER, Constants.DISCONNECT_CLIENT, "");
+            SocketUtils.SendMessage(Store.GetInstance().socket, messageItem);
+        }
+
         #region Observable server response
 
         public void FriendshipAccepted(string data)
@@ -271,6 +277,7 @@ namespace Client
                 Store.GetInstance().LoginState.OnError(new ServerException(data.Replace(Constants.ERROR_RESPONSE, "")));
             }
         }
+
         #endregion
     }
 }

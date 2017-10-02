@@ -38,6 +38,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnConnect = new System.Windows.Forms.Button();
+            this.txtClientIp = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudClientPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudServerPort)).BeginInit();
@@ -47,6 +49,8 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.Controls.Add(this.txtClientIp);
+            this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.nudClientPort);
             this.panel1.Controls.Add(this.nudServerPort);
             this.panel1.Controls.Add(this.label4);
@@ -64,7 +68,7 @@
             // 
             // nudClientPort
             // 
-            this.nudClientPort.Location = new System.Drawing.Point(189, 260);
+            this.nudClientPort.Location = new System.Drawing.Point(189, 278);
             this.nudClientPort.Maximum = new decimal(new int[] {
             68000,
             0,
@@ -76,7 +80,7 @@
             // 
             // nudServerPort
             // 
-            this.nudServerPort.Location = new System.Drawing.Point(189, 197);
+            this.nudServerPort.Location = new System.Drawing.Point(189, 178);
             this.nudServerPort.Maximum = new decimal(new int[] {
             68000,
             0,
@@ -100,7 +104,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(68, 267);
+            this.label3.Location = new System.Drawing.Point(68, 285);
             this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(98, 22);
@@ -128,7 +132,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(60, 199);
+            this.label2.Location = new System.Drawing.Point(60, 180);
             this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 22);
@@ -155,6 +159,24 @@
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            // 
+            // txtClientIp
+            // 
+            this.txtClientIp.Location = new System.Drawing.Point(189, 227);
+            this.txtClientIp.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.txtClientIp.Name = "txtClientIp";
+            this.txtClientIp.Size = new System.Drawing.Size(180, 29);
+            this.txtClientIp.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(76, 230);
+            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(82, 22);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Client IP";
             // 
             // Connection
             // 
@@ -186,6 +208,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown nudClientPort;
         private System.Windows.Forms.NumericUpDown nudServerPort;
+        private System.Windows.Forms.TextBox txtClientIp;
+        private System.Windows.Forms.Label label5;
     }
 }
 

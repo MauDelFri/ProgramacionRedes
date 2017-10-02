@@ -197,6 +197,7 @@
             this.MinimumSize = new System.Drawing.Size(1000, 692);
             this.Name = "Home";
             this.Text = "Server";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Home_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.connectedClientsPanel.ResumeLayout(false);

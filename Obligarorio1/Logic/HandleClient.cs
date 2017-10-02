@@ -32,6 +32,10 @@ namespace Obligarorio1
                 }
 
                 ProtocolItem message = SocketUtils.RecieveMessage(this.clientSocket);
+                if (message.Command == Constants.DISCONNECT_CLIENT)
+                {
+                    break;
+                }
                 Console.WriteLine(message);
                 this.mapper.MapCommandToService(message, this);
             }

@@ -17,6 +17,9 @@ namespace Client
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Connection());
+
+            Application.ExitThread();
+            Environment.Exit(0);
         }
     }
 }

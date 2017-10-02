@@ -19,6 +19,7 @@ namespace Obligarorio1
         {
             InitializeComponent();
             this.txtServerIp.Text = Constants.DEFAULT_SERVER_IP;
+            this.txtClientIp.Text = Constants.DEFAULT_CLIENT_IP;
             this.nudClientPort.Value = Constants.DEFAULT_CLIENT_PORT;
             this.nudServerPort.Value = Constants.DEFAULT_SERVER_PORT;
         }
@@ -37,10 +38,12 @@ namespace Obligarorio1
 
         private void TryConnect()
         {
-            if (!String.IsNullOrEmpty(this.txtServerIp.Text) && this.nudServerPort.Value > 0 && this.nudClientPort.Value >= 0)
+            if (!String.IsNullOrEmpty(this.txtServerIp.Text) && this.nudServerPort.Value > 0 && 
+                this.nudClientPort.Value >= 0 && !String.IsNullOrEmpty(this.txtClientIp.Text))
             {
                 ClientConnection connection = new ClientConnection();
-                connection.Connect(this.txtServerIp.Text, (int)this.nudServerPort.Value, (int)this.nudClientPort.Value);
+                connection.Connect(this.txtServerIp.Text, (int)this.nudServerPort.Value, 
+                    this.txtClientIp.Text, (int)this.nudClientPort.Value);
 
                 Login loginForm = new Login();
                 loginForm.Tag = this;

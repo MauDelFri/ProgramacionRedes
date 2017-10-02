@@ -52,5 +52,11 @@ namespace Obligarorio1
                 }));
             }
         }
+
+        private void Login_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.ExitThread();
+            Environment.Exit(0);
+        }
     }
 }

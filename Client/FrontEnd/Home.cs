@@ -45,7 +45,6 @@ namespace Client
             {
                 this.Invoke(new Action(() =>
                 {
-                    this.listBoxMyFriends.Items.Clear();
                     this.listBoxMyFriends.Items.Add(data);
                 }));
             }
@@ -57,9 +56,7 @@ namespace Client
             {
                 this.Invoke(new Action(() =>
                 {
-                    Store.GetInstance().user.PendingFriendship.Add(new User(data));
-                    this.listBoxFriendshipRequests.Items.Clear();
-                    this.listBoxFriendshipRequests.Items.AddRange(Store.GetInstance().user.PendingFriendship.ToArray());
+                    this.listBoxFriendshipRequests.Items.Add(data);
                 }));
             }
         }
@@ -301,6 +298,13 @@ namespace Client
                 string message = this.txtMessage.Text;
                 this.service.SendMessage(friendUsername + Constants.ATTRIBUTE_SEPARATOR + message);
             }
+        }
+
+        private void Home_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.service.Disconnect();
+            Application.ExitThread();
+            Environment.Exit(0);
         }
     }
 }

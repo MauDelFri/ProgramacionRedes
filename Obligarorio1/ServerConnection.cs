@@ -23,6 +23,7 @@ namespace Obligarorio1
                 Console.WriteLine("Start waiting for client");
                 var clientSocket = serverSocket.Accept();
                 Thread thread = new Thread(() => new HandleClient(clientSocket));
+                thread.IsBackground = true;
                 thread.Start();
                 Console.WriteLine("Client connected");
             }

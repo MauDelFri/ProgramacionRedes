@@ -1,0 +1,4 @@
+C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Utils\bin\Release\Utils.dll
+C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Utils\bin\Release\Utils.pdb
+C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Utils\obj\Release\Utils.dll
+C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Utils\obj\Release\Utils.pdb

@@ -42,5 +42,11 @@ namespace Obligarorio1
             this.listConnectedClients.Items.Clear();
             this.listConnectedClients.Items.AddRange(items.ToArray());
         }
+
+        private void Home_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.ExitThread();
+            Environment.Exit(0);
+        }
     }
 }

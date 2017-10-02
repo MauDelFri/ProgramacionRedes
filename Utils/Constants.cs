@@ -23,6 +23,7 @@ namespace Utils
         public const int MESSAGE_READ = 9;
         public const int GET_PENDING_FRIENDSHIPS = 10;
         public const int GET_PENDING_MESSAGES = 11;
+        public const int DISCONNECT_CLIENT = 12;
 
         public const char ATTRIBUTE_SEPARATOR = '-';
         public const char OBJECT_SEPARATOR = '|';
@@ -32,7 +33,9 @@ namespace Utils
         public const string SUCCESS_RESPONSE = "OK";
         public const string ERROR_RESPONSE = "ERROR:";
         public const string DEFAULT_SERVER_IP = "127.0.0.1";
+        public const string DEFAULT_CLIENT_IP = "127.0.0.1";
         public const int DEFAULT_SERVER_PORT = 6000;
         public const int DEFAULT_CLIENT_PORT = 0;
+
     }
 }

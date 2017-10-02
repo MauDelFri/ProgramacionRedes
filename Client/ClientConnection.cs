@@ -17,15 +17,16 @@ namespace Client
 
         public ClientConnection() { }
 
-        public void Connect(string serverIp, int serverPort, int clientPort)
+        public void Connect(string serverIp, int serverPort, string clientIp, int clientPort)
         {
             var serverIPEndPoint = new IPEndPoint(IPAddress.Parse(serverIp), serverPort);
-            var clientIPEndPoint = new IPEndPoint(IPAddress.Parse(serverIp), clientPort);
+            var clientIPEndPoint = new IPEndPoint(IPAddress.Parse(clientIp), clientPort);
             this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             this.socket.Bind(clientIPEndPoint);
             this.socket.Connect(serverIPEndPoint);
             Store.GetInstance().socket = this.socket;
             Thread thread = new Thread(() => new HandleServer(this.socket));
+            thread.IsBackground = true;
             thread.Start();
         }
 

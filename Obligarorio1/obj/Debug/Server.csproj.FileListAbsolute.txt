@@ -1,15 +1,6 @@
-C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\Obligarorio1.exe.config
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\Obligarorio1.exe
-C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\Obligarorio1.pdb
-C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\obj\Debug\Server.csprojResolveAssemblyReference.cache
-C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\obj\Debug\Obligarorio1.Properties.Resources.resources
-C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\obj\Debug\Server.csproj.GenerateResource.Cache
-C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\obj\Debug\Obligarorio1.exe
-C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\obj\Debug\Obligarorio1.pdb
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\Domain.dll
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\Utils.dll
-C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\Domain.pdb
-C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\Utils.pdb
 C:\Proyectos\programacion-de-redes\Obligarorio1\bin\Debug\Obligarorio1.exe.config
 C:\Proyectos\programacion-de-redes\Obligarorio1\obj\Debug\Obligarorio1.exe
 C:\Proyectos\programacion-de-redes\Obligarorio1\obj\Debug\Obligarorio1.pdb
@@ -36,15 +27,24 @@ C:\Users\Baro\ProgramacionRedes\Obligarorio1\bin\Debug\Utils.pdb
 C:\Users\Baro\ProgramacionRedes\Obligarorio1\obj\Debug\Server.csprojResolveAssemblyReference.cache
 C:\Users\Baro\ProgramacionRedes\Obligarorio1\obj\Debug\Obligarorio1.exe
 C:\Users\Baro\ProgramacionRedes\Obligarorio1\obj\Debug\Obligarorio1.pdb
-C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\obj\Debug\Obligarorio1.Home.resources
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\System.Reactive.Core.dll
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\System.Reactive.Interfaces.dll
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\System.Reactive.Linq.dll
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\System.Reactive.PlatformServices.dll
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\System.Reactive.Windows.Threading.dll
+C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\Domain.pdb
+C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\Utils.pdb
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\System.Reactive.Core.xml
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\System.Reactive.Interfaces.xml
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\System.Reactive.Linq.xml
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\System.Reactive.PlatformServices.xml
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\System.Reactive.Windows.Threading.xml
+C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\obj\Debug\Server.csprojResolveAssemblyReference.cache
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\obj\Debug\Obligarorio1.Connection.resources
+C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\obj\Debug\Obligarorio1.Home.resources
+C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\obj\Debug\Obligarorio1.Properties.Resources.resources
+C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\obj\Debug\Server.csproj.GenerateResource.Cache
+C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\obj\Debug\Obligarorio1.exe
+C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\obj\Debug\Obligarorio1.pdb
+C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\Obligarorio1.exe.config
+C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\Obligarorio1.pdb
