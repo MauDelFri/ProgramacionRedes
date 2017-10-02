@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace Domain
     public class Message
     {
         public String Text { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime Date;
         public User Sender { get; set; }
         public User Receiver { get; set; }
 
@@ -20,6 +21,17 @@ namespace Domain
             this.Sender = sender;
             this.Receiver = receiver;
             this.Date = DateTime.Now;
+        }
+
+        public Message(User sender, string date, string text)
+        {
+            this.Text = text;
+            this.Sender = sender;
+            bool result = DateTime.TryParseExact(date, Constants.DATE_FORMAT, null, DateTimeStyles.None, out this.Date);
+            if (!result)
+            {
+                this.Date = DateTime.Now;
+            }
         }
 
         public string FormatToSend()

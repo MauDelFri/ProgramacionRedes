@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Client;
+using Client.Logic;
 
 namespace Obligarorio1
 {
@@ -19,6 +20,7 @@ namespace Obligarorio1
         {
             InitializeComponent();
             this.service = new ClientService();
+            Store.GetInstance().LoginState.Subscribe(data => this.OnLoginSuccess(), error => this.OnLoginError(error.Message));
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -26,14 +28,28 @@ namespace Obligarorio1
             try
             {
                 this.service.TryLogin(this.txtUsername.Text, this.txtPassword.Text);
-                Home homeForm= new Home(this.service);
-                homeForm.Tag = this;
-                homeForm.Show(this);
-                Hide();
             }
             catch (Exception exception)
             {
                 this.lblError.Text = exception.Message;
+            }
+        }
+
+        private void OnLoginError(string message)
+        {
+            this.lblError.Text = message;
+        }
+
+        private void OnLoginSuccess()
+        {   
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => {
+                    Home homeForm = new Home(this.service);
+                    homeForm.Tag = this;
+                    homeForm.Show(this);
+                    Hide();
+                }));
             }
         }
     }

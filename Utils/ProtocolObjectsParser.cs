@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Utils.Exceptions;
 
 namespace Utils
@@ -61,6 +63,12 @@ namespace Utils
             {
                 throw new InvalidMessageFormatException();
             }
+        }
+
+        public List<string[]> GetMessages(string data)
+        {
+            string[] messagesString = this.GetListObject(data);
+            return messagesString.Select(m => this.GetListAttribute(m)).ToList();
         }
     }
 }

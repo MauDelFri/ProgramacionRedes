@@ -16,12 +16,26 @@ namespace Domain
         public List<Message> PendingMessages { get; set; }
         public int TimesConnected { get; set; }
 
-        public User() { }
+        public User()
+        {
+            this.Initialize();
+        }
 
         public User(string username, string password)
         {
             this.Username = username;
             this.Password = password;
+            this.Initialize();
+        }
+
+        public User(string username)
+        {
+            this.Username = username;
+            this.Initialize();
+        }
+
+        private void Initialize()
+        {
             this.TimesConnected = 0;
             this.Friends = new List<User>();
             this.PendingFriendship = new List<User>();

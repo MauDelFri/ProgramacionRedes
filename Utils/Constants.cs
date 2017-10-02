@@ -29,5 +29,7 @@ namespace Utils
         public const string DATE_FORMAT = "dd/MM/yyyy HH:mm:ss";
         public const string ACCEPT_FRIENDSHIP_ACTION = "accept";
         public const string REJECT_FRIENDSHIP_ACTION = "reject";
+        public const string SUCCESS_RESPONSE = "OK";
+        public const string ERROR_RESPONSE = "ERROR:";
     }
 }
