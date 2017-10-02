@@ -27,16 +27,21 @@ namespace Client
             this.thread.Start();
         }
 
+        public User GetUser()
+        {
+            return user;
+        }
+
         public void TryLogin(string username, string password)
         {
             if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
             {
-                throw new EmptyFieldsException("Complete all fileds");
+                throw new EmptyFieldsException();
             }
 
             if (username.Contains("-") || password.Contains("-"))
             {
-                throw new InvalidCharactersException("The fields can not contain '-'");
+                throw new InvalidCharactersException();
             }
 
             String dataToSend = username + "-" + password;
@@ -75,11 +80,36 @@ namespace Client
 
         public string[] GetMyFriends()
         {
-            ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.CONNECTED_USERS, "");
+            ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.GET_FRIENDS, "");
             SocketUtils.SendMessage(this.connection.GetClientSocket(), message);
             ProtocolItem response = SocketUtils.RecieveMessage(this.connection.GetClientSocket());
             this.ProcessResponse(response);
-            return Parser.GetMyFriends(response.Data);
+            return Parser.GetListObject(response.Data);
+        }
+
+        public void AddFriend(string username)
+        {
+            ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.SEND_FRIENDSHIP_REQUEST, username);
+            SocketUtils.SendMessage(this.connection.GetClientSocket(), message);
+            ProtocolItem response = SocketUtils.RecieveMessage(this.connection.GetClientSocket());
+            this.ProcessResponse(response);
+        }
+
+        public string[] GetFriendshipRequests()
+        {
+            ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.GET_PENDING_FRIENDSHIPS, this.user.Username);
+            SocketUtils.SendMessage(this.connection.GetClientSocket(), message);
+            ProtocolItem response = SocketUtils.RecieveMessage(this.connection.GetClientSocket());
+            this.ProcessResponse(response);
+            return Parser.GetListObject(response.Data);
+        }
+
+        public void AcceptRequest(string username)
+        {
+            ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.RESPOND_FRIENDSHIP_REQUEST, username);
+            SocketUtils.SendMessage(this.connection.GetClientSocket(), message);
+            ProtocolItem response = SocketUtils.RecieveMessage(this.connection.GetClientSocket());
+            this.ProcessResponse(response);
         }
     }
 }

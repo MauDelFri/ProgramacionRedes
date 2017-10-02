@@ -26,7 +26,7 @@ namespace Obligarorio1.Logic
 
         public List<Session> GetConnectedSessions()
         {
-            return Repository.ConnectedSessions;
+            return Repository.ConnectedClients.Select(h => h.CurrentSession).ToList();
         }
     }
 }

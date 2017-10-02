@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Utils.Exceptions
+{
+    public class MessageNotPendingException : ServerException 
+    {
+        public MessageNotPendingException() : base("There is not pending message with those parameters") { }
+
+        public MessageNotPendingException(string message) : base(message) { }
+    }
+}

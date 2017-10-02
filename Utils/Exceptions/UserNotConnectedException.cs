@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Utils.Exceptions
 {
-    public class UserNotConnectedException : Exception 
+    public class UserNotConnectedException : ServerException 
     {
-        public UserNotConnectedException()
-        {
-
-        }
+        public UserNotConnectedException() : base("User is not connected") { }
 
         public UserNotConnectedException(string message) : base(message) { }
     }

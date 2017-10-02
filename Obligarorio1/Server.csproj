@@ -46,14 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logic\FunctionalityMapper.cs" />
-    <Compile Include="Logic\HandleClient.cs" />
     <Compile Include="FrontEnd\Home.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrontEnd\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logic\FunctionalityMapper.cs" />
+    <Compile Include="Logic\HandleClient.cs" />
     <Compile Include="Logic\ServerLogic.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

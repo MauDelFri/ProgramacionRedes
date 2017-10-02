@@ -1,24 +1,18 @@
-﻿using Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Utils.Exceptions;
 
 namespace Utils
 {
     public class ProtocolObjectsParser
     {
-        public User GetUser(string data)
+        public string[] GetUser(string data)
         {
             //Posiblemente tendriamos verificacion del formato de data 
             //(que realmente esta compuesta por 2 propiedades separadas por '-') antes de realizar el parseo?
             // hasta se podria llamar TryGetUser y tirar excepcion en caso de que no este bien el formato
             if (this.isMessageFormatValid(data, 2, 1))
             {
-                string[] propertiesSplitted = data.Split('-');
-                User user = new User(propertiesSplitted[0], propertiesSplitted[1]);
+                string[] user = data.Split('-');
                 return user;
             }
             else
@@ -49,6 +43,24 @@ namespace Utils
         {
             string[] propertiesSplitted = data.Split(Constants.ATTRIBUTE_SEPARATOR);
             return propertiesSplitted;
+        }
+
+        public string[] GetListObject(string data)
+        {
+            string[] objectSplitted = data.Split(Constants.OBJECT_SEPARATOR);
+            return objectSplitted;
+        }
+
+        public string[] GetStringArray(string data, int attributesCount)
+        {
+            if (this.isMessageFormatValid(data, attributesCount, 1))
+            {
+                return data.Split(Constants.ATTRIBUTE_SEPARATOR);
+            }
+            else
+            {
+                throw new InvalidMessageFormatException();
+            }
         }
     }
 }

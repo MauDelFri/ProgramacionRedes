@@ -13,5 +13,3 @@ C:\Users\Baro\ProgramacionRedes\Utils\bin\Debug\Utils.pdb
 C:\Users\Baro\ProgramacionRedes\Utils\obj\Debug\Utils.csprojResolveAssemblyReference.cache
 C:\Users\Baro\ProgramacionRedes\Utils\obj\Debug\Utils.dll
 C:\Users\Baro\ProgramacionRedes\Utils\obj\Debug\Utils.pdb
-C:\Users\Baro\ProgramacionRedes\Utils\bin\Debug\Domain.dll
-C:\Users\Baro\ProgramacionRedes\Utils\bin\Debug\Domain.pdb

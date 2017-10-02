@@ -8,16 +8,26 @@ namespace Utils
 {
     public static class Constants
     {
-        public static string REQUEST_HEADER = "REQ";
-        public static string RESPONSE_HEADER = "RES";
+        public const string REQUEST_HEADER = "REQ";
+        public const string RESPONSE_HEADER = "RES";
         public const int ERROR_CODE = 99;
         public const int OK_CODE = 0;
         public const int LOGIN_CODE = 1;
         public const int LOGOUT_CODE = 2;
         public const int CONNECTED_USERS = 3;
         public const int GET_FRIENDS = 4;
+        public const int SEND_FRIENDSHIP_REQUEST = 5;
+        public const int RESPOND_FRIENDSHIP_REQUEST = 6;
+        public const int FRIENDSHIP_ACCEPTED = 7;
+        public const int SEND_MESSAGE = 8;
+        public const int MESSAGE_READ = 9;
+        public const int GET_PENDING_FRIENDSHIPS = 10;
+        public const int GET_PENDING_MESSAGES = 11;
 
-        public static char ATTRIBUTE_SEPARATOR = '-';
-        public static char OBJECT_SEPARATOR = '|';
+        public const char ATTRIBUTE_SEPARATOR = '-';
+        public const char OBJECT_SEPARATOR = '|';
+        public const string DATE_FORMAT = "dd/MM/yyyy HH:mm:ss";
+        public const string ACCEPT_FRIENDSHIP_ACTION = "accept";
+        public const string REJECT_FRIENDSHIP_ACTION = "reject";
     }
 }

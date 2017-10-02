@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -12,6 +13,7 @@ namespace Obligarorio1
     {
         private FunctionalityMapper mapper;
         private Socket clientSocket;
+        public Session CurrentSession { get; set; }
 
         public HandleClient(Socket clientSocket)
         {
@@ -36,33 +38,37 @@ namespace Obligarorio1
 
         public void AcknowledgeResponse()
         {
-            ProtocolItem responseMessage = new ProtocolItem();
-            responseMessage.Header = Constants.RESPONSE_HEADER;
-            responseMessage.Command = Constants.OK_CODE;
-
+            ProtocolItem responseMessage = this.CreateProtocolItem(Constants.RESPONSE_HEADER, Constants.OK_CODE, "");
             SocketUtils.SendMessage(this.clientSocket, responseMessage);
         }
 
         public void ErrorResponse(string errorMessage)
         {
-            ProtocolItem responseMessage = new ProtocolItem();
-            responseMessage.Header = Constants.RESPONSE_HEADER;
-            responseMessage.Command = Constants.ERROR_CODE;
-            responseMessage.Data = errorMessage;
-            responseMessage.MessageLength = System.Text.Encoding.ASCII.GetBytes(responseMessage.Data).Length;
-
+            ProtocolItem responseMessage = this.CreateProtocolItem(Constants.RESPONSE_HEADER, Constants.ERROR_CODE, errorMessage);
             SocketUtils.SendMessage(this.clientSocket, responseMessage);
         }
 
         public void MessageResponse(string data)
         {
+            ProtocolItem responseMessage = this.CreateProtocolItem(Constants.RESPONSE_HEADER, Constants.OK_CODE, data);
+            SocketUtils.SendMessage(this.clientSocket, responseMessage);
+        }
+
+        public void SendMessage(string data, int command)
+        {
+            ProtocolItem responseMessage = this.CreateProtocolItem(Constants.REQUEST_HEADER, command, data);
+            SocketUtils.SendMessage(this.clientSocket, responseMessage);
+        }
+
+        private ProtocolItem CreateProtocolItem(string header, int command, string data)
+        {
             ProtocolItem responseMessage = new ProtocolItem();
-            responseMessage.Header = Constants.RESPONSE_HEADER;
-            responseMessage.Command = Constants.OK_CODE;
+            responseMessage.Header = header;
+            responseMessage.Command = command;
             responseMessage.Data = data;
             responseMessage.MessageLength = System.Text.Encoding.ASCII.GetBytes(responseMessage.Data).Length;
 
-            SocketUtils.SendMessage(this.clientSocket, responseMessage);
+            return responseMessage;
         }
     }
 }

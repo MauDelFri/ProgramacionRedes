@@ -41,8 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Exceptions\MessageNotPendingException.cs" />
+    <Compile Include="Exceptions\UserAlreadyRequestException.cs" />
+    <Compile Include="Exceptions\UserNotExistsException.cs" />
     <Compile Include="Exceptions\UserNotConnectedException.cs" />
     <Compile Include="Exceptions\UserAlreadyConnectedException.cs" />
+    <Compile Include="Exceptions\UsersAlreadyFriendsException.cs" />
     <Compile Include="Exceptions\WrongUserCredentialsException.cs" />
     <Compile Include="Exceptions\InvalidMessageFormatException.cs" />
     <Compile Include="Exceptions\ServerException.cs" />
@@ -52,12 +56,6 @@
     <Compile Include="ProtocolItem.cs" />
     <Compile Include="ProtocolObjectsParser.cs" />
     <Compile Include="SocketUtils.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{06A445AF-200A-430E-895D-52521C27FB3D}</Project>
-      <Name>Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

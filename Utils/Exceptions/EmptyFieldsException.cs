@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Utils.Exceptions
 {
-    public class EmptyFieldsException : Exception 
+    public class EmptyFieldsException : ServerException 
     {
-        public EmptyFieldsException()
-        {
-
-        }
+        public EmptyFieldsException() : base("Complete all fileds") { }
 
         public EmptyFieldsException(string message) : base(message) { }
     }
