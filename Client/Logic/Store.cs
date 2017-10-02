@@ -23,6 +23,7 @@ namespace Client.Logic
         public ReplaySubject<string> SendMessageState { get; set; }
         public ReplaySubject<string> SendFriendshipRequestState { get; set; }
         public ReplaySubject<string> MessageReadState { get; set; }
+        public ReplaySubject<string> FriendshipAcceptedState { get; set; }
         public ReplaySubject<string[]> PendingFriendshipsState { get; set; }
         public ReplaySubject<List<Message>> PendingMessagesState { get; set; }
         public ReplaySubject<string> ReceiveFriendshipRequestsState { get; set; }
@@ -42,6 +43,7 @@ namespace Client.Logic
             this.PendingMessagesState = new ReplaySubject<List<Message>>();
             this.ReceiveMessagesState = new ReplaySubject<Message>();
             this.ReceiveFriendshipRequestsState = new ReplaySubject<string>();
+            this.FriendshipAcceptedState = new ReplaySubject<string>();
         }
 
         public static Store GetInstance()

@@ -79,6 +79,9 @@ namespace Obligarorio1
                 case Constants.SEND_MESSAGE:
                     service.ReceiveMessage(message.Data);
                     break;
+                case Constants.FRIENDSHIP_ACCEPTED:
+                    service.FriendshipAccepted(message.Data);
+                    break;
                 default:
                     break;
             }

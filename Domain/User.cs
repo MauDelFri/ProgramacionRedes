@@ -10,7 +10,6 @@ namespace Domain
     {
         public String Username { get; set; }
         public String Password { get; set; }
-        public String Name { get; set; }
         public List<User> Friends { get; set; }
         public List<User> PendingFriendship { get; set; }
         public List<Message> PendingMessages { get; set; }
@@ -56,6 +55,11 @@ namespace Domain
         public void RemovePendingFriendship(User user)
         {
             this.PendingFriendship.Remove(user);
+        }
+
+        public override string ToString()
+        {
+            return this.Username;
         }
     }
 }

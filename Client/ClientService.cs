@@ -84,13 +84,38 @@ namespace Client
             SocketUtils.SendMessage(Store.GetInstance().socket, message);
         }
 
+        public void MessageRead(Message message)
+        {
+            ProtocolItem messageItem = new ProtocolItem(Constants.REQUEST_HEADER, Constants.MESSAGE_READ, message.Sender.Username + "-" + message.Date.ToString(Constants.DATE_FORMAT));
+            SocketUtils.SendMessage(Store.GetInstance().socket, messageItem);
+        }
+
         public void AcceptRequest(string username)
         {
             ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.RESPOND_FRIENDSHIP_REQUEST, username);
             SocketUtils.SendMessage(Store.GetInstance().socket, message);
         }
 
+        public void SendMessage(string message)
+        {
+            ProtocolItem messageItem = new ProtocolItem(Constants.REQUEST_HEADER, Constants.SEND_MESSAGE, message);
+            SocketUtils.SendMessage(Store.GetInstance().socket, messageItem);
+        }
+
         #region Observable server response
+
+        public void FriendshipAccepted(string data)
+        {
+            if (data.StartsWith(Constants.ERROR_RESPONSE))
+            {
+                Store.GetInstance().FriendshipAcceptedState.OnError(new ServerException(data.Replace(Constants.ERROR_RESPONSE, "")));
+            }
+            else
+            {
+                Store.GetInstance().FriendshipAcceptedState.OnNext(Parser.GetString(data));
+            }
+        }
+
         public void RespondFriendshipRequestResponse(string data)
         {
             if (data.Equals(Constants.SUCCESS_RESPONSE))
@@ -154,13 +179,13 @@ namespace Client
 
         public void SendMessageResponse(string data)
         {
-            if (data.Equals(Constants.SUCCESS_RESPONSE))
+            if (data.StartsWith(Constants.ERROR_RESPONSE))
             {
-                Store.GetInstance().SendMessageState.OnNext("");
+                Store.GetInstance().SendMessageState.OnError(new ServerException(data.Replace(Constants.ERROR_RESPONSE, "")));
             }
             else
             {
-                Store.GetInstance().SendMessageState.OnError(new ServerException(data.Replace(Constants.ERROR_RESPONSE, "")));
+                Store.GetInstance().SendMessageState.OnNext(data);
             }
         }
 

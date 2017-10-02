@@ -177,22 +177,24 @@ namespace Obligarorio1
             if (Repository.ExistsUser(username))
             {
                 User user = Repository.GetUserFromUsername(username);
-                if (user.PendingFriendship.Contains(handleClient.CurrentSession.User))
+                if (user.PendingFriendship.Contains(this.handleClient.CurrentSession.User))
                 {
                     throw new UserAlreadyRequestException();
                 }
                 
-                if (handleClient.CurrentSession.User.PendingFriendship.Contains(user))
-                {
-                    handleClient.CurrentSession.User.Friends.Add(user);
-                    user.Friends.Add(handleClient.CurrentSession.User);
-                    handleClient.CurrentSession.User.RemovePendingFriendship(user);
-                    //Ver como manejar el mensaje
-                }
-
                 if (handleClient.CurrentSession.User.Friends.Contains(user))
                 {
                     throw new UsersAlreadyFriendsException();
+                }
+
+                if (this.handleClient.CurrentSession.User.PendingFriendship.Contains(user))
+                {
+                    this.handleClient.CurrentSession.User.Friends.Add(user);
+                    user.Friends.Add(this.handleClient.CurrentSession.User);
+                    this.handleClient.CurrentSession.User.RemovePendingFriendship(user);
+                    this.handleClient.SendMessage(Constants.REQUEST_HEADER, Constants.FRIENDSHIP_ACCEPTED, user.Username);
+                    HandleClient userSession = Repository.GetUserSession(user);
+                    userSession.SendMessage(Constants.REQUEST_HEADER, Constants.FRIENDSHIP_ACCEPTED, this.handleClient.CurrentSession.User.Username);
                 }
                 else
                 {
@@ -273,7 +275,7 @@ namespace Obligarorio1
             if (Repository.ExistsUser(dataArray[0]))
             {
                 this.ProcessMessageToSend(dataArray);
-                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.SEND_MESSAGE, Constants.SUCCESS_RESPONSE);
+                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.SEND_MESSAGE, data);
             }
             else
             {
@@ -400,7 +402,7 @@ namespace Obligarorio1
         {
             string[] messageData = this.Parser.GetStringArray(data, 2);
             Message messageRead = this.handleClient.CurrentSession.User.PendingMessages.
-                Find(m => m.Sender.Username.Equals(messageData[0]) && m.Date.ToString().Equals(messageData[1]));
+                Find(m => m.Sender.Username.Equals(messageData[0]) && m.Date.ToString(Constants.DATE_FORMAT).Equals(messageData[1]));
             if (messageRead != null)
             {
                 this.handleClient.CurrentSession.User.PendingMessages.Remove(messageRead);
