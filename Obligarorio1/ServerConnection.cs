@@ -11,9 +11,9 @@ namespace Obligarorio1
 {
     public class ServerConnection
     {
-        public ServerConnection()
+        public ServerConnection(string serverIp, int serverPort)
         {
-            var serverIPEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6000);
+            var serverIPEndPoint = new IPEndPoint(IPAddress.Parse(serverIp), serverPort);
             var serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             serverSocket.Bind(serverIPEndPoint);
             serverSocket.Listen(100);

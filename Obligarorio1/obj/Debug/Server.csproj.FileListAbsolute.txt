@@ -47,3 +47,4 @@ C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obl
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\System.Reactive.Linq.xml
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\System.Reactive.PlatformServices.xml
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\bin\Debug\System.Reactive.Windows.Threading.xml
+C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Obligarorio1\obj\Debug\Obligarorio1.Connection.resources

@@ -17,10 +17,10 @@ namespace Client
 
         public ClientConnection() { }
 
-        public void Connect()
+        public void Connect(string serverIp, int serverPort, int clientPort)
         {
-            var serverIPEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6000);
-            var clientIPEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 0);
+            var serverIPEndPoint = new IPEndPoint(IPAddress.Parse(serverIp), serverPort);
+            var clientIPEndPoint = new IPEndPoint(IPAddress.Parse(serverIp), clientPort);
             this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             this.socket.Bind(clientIPEndPoint);
             this.socket.Connect(serverIPEndPoint);

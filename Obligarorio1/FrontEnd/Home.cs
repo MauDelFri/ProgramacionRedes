@@ -17,10 +17,10 @@ namespace Obligarorio1
     {
         ServerLogic logic;
 
-        public Home()
+        public Home(ServerLogic logic)
         {
+            this.logic = logic;
             InitializeComponent();
-            this.logic = new ServerLogic();
             this.listRegisteredClients.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             this.listConnectedClients.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }

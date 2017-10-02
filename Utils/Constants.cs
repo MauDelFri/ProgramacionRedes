@@ -31,5 +31,8 @@ namespace Utils
         public const string REJECT_FRIENDSHIP_ACTION = "reject";
         public const string SUCCESS_RESPONSE = "OK";
         public const string ERROR_RESPONSE = "ERROR:";
+        public const string DEFAULT_SERVER_IP = "127.0.0.1";
+        public const int DEFAULT_SERVER_PORT = 6000;
+        public const int DEFAULT_CLIENT_PORT = 0;
     }
 }

@@ -12,10 +12,10 @@ namespace Obligarorio1.Logic
     {
         private Thread thread;
 
-        public ServerLogic()
+        public ServerLogic(string serverIp, int serverPort)
         {
             Repository.Initialize();
-            this.thread = new Thread(() => new ServerConnection());
+            this.thread = new Thread(() => new ServerConnection(serverIp, serverPort));
             this.thread.Start();
         }
 

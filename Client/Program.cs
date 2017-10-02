@@ -14,11 +14,9 @@ namespace Client
         [STAThread]
         static void Main()
         {
-            ClientConnection connection = new ClientConnection();
-            connection.Connect();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            Application.Run(new Connection());
         }
     }
 }
