@@ -14,6 +14,7 @@ namespace Client
     {
         private ClientService service;
         private List<TabPage> chats;
+        private bool isLoggingOut = false;
 
         public object Parser { get; private set; }
 
@@ -195,6 +196,7 @@ namespace Client
             {
                 this.Invoke(new Action(() =>
                 {
+                    this.isLoggingOut = true;
                     var loginForm = (Login)Tag;
                     loginForm.Show();
                     Close();
@@ -302,9 +304,12 @@ namespace Client
 
         private void Home_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.service.Disconnect();
-            Application.ExitThread();
-            Environment.Exit(0);
+            if (!this.isLoggingOut)
+            {
+                this.service.Disconnect();
+                Application.ExitThread();
+                Environment.Exit(0);
+            }
         }
     }
 }

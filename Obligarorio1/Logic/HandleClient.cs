@@ -30,12 +30,22 @@ namespace Obligarorio1
                 {
                     break;
                 }
-
-                ProtocolItem message = SocketUtils.RecieveMessage(this.clientSocket);
-                if (message.Command == Constants.DISCONNECT_CLIENT)
+                ProtocolItem message;
+                try
+                {
+                    message = SocketUtils.RecieveMessage(this.clientSocket);
+                }
+                catch (SocketException e)
                 {
                     break;
                 }
+
+                if (message.Command == Constants.DISCONNECT_CLIENT)
+                {
+                    Repository.DisconnectUser(this.CurrentSession.User);
+                    break;
+                }
+
                 Console.WriteLine(message);
                 this.mapper.MapCommandToService(message, this);
             }

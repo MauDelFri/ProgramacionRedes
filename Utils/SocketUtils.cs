@@ -17,7 +17,7 @@ namespace Utils
             return item;
         }
 
-        private static ProtocolItem RecieveHeader(Socket socket)
+        private static ProtocolItem RecieveHeader(Socket socket) 
         {
             int received = 0;
             var headerBytes = new Byte[FixedMessageLengthSize];
