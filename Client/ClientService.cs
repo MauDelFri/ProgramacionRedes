@@ -10,6 +10,7 @@ using System.Net;
 using Domain;
 using System.Threading;
 using Client.Logic;
+using System.IO;
 
 namespace Client
 {
@@ -44,6 +45,16 @@ namespace Client
             ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.LOGIN_CODE, dataToSend);
             SocketUtils.SendMessage(Store.GetInstance().socket, message);
             Store.GetInstance().user = new User(username, password);
+        }
+
+        public void SendTestFile()
+        {
+            FileStream filestream = new FileStream("./Files/cancion.mp3", FileMode.Open);
+            ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.RECEIVE_FILE, filestream.Length + "-cancion.mp3");
+            filestream.Close();
+            SocketUtils.SendMessage(Store.GetInstance().socket, message);
+            Thread.Sleep(1000);
+            SocketUtils.SendFile(Store.GetInstance().socket, "./Files/cancion.mp3");
         }
 
         private void ProcessResponse(ProtocolItem response)

@@ -46,6 +46,9 @@ namespace Obligarorio1
                 case Constants.GET_PENDING_MESSAGES:
                     service.GetPendingMessages(message.Data);
                     break;
+                case Constants.RECEIVE_FILE:
+                    service.ReceiveFile(message.Data);
+                    break;
                 default:
                     break;
             }

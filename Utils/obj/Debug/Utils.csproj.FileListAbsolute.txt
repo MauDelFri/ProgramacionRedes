@@ -12,3 +12,4 @@ C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Uti
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Utils\bin\Debug\Utils.pdb
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Utils\obj\Debug\Utils.dll
 C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Utils\obj\Debug\Utils.pdb
+C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Utils\obj\Debug\Utils.csprojResolveAssemblyReference.cache

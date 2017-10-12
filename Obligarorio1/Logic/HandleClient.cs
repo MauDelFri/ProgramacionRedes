@@ -75,5 +75,10 @@ namespace Obligarorio1
         {
             SocketUtils.SendMessage(this.clientSocket, message);
         }
+
+        public string ReceiveFile(long fileLength, string filename)
+        {
+            return SocketUtils.ReceiveFile(this.clientSocket, fileLength, filename);
+        }
     }
 }

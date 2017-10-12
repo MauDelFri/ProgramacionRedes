@@ -414,5 +414,24 @@ namespace Obligarorio1
                 throw new MessageNotPendingException();
             }
         }
+
+        public void ReceiveFile(string data)
+        {
+            try
+            {
+                this.TryReceiveFile(data);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.MESSAGE_READ, Constants.ERROR_RESPONSE + e.Message);
+            }
+        }
+
+        private void TryReceiveFile(string data)
+        {
+            string[] messageData = this.Parser.GetStringArray(data, 2);
+            string filepath = this.handleClient.ReceiveFile(long.Parse(messageData[0]), messageData[1]);
+        }
     }
 }

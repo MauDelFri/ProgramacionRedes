@@ -24,6 +24,7 @@ namespace Utils
         public const int GET_PENDING_FRIENDSHIPS = 10;
         public const int GET_PENDING_MESSAGES = 11;
         public const int DISCONNECT_CLIENT = 12;
+        public const int RECEIVE_FILE = 13;
 
         public const char ATTRIBUTE_SEPARATOR = '-';
         public const char OBJECT_SEPARATOR = '|';

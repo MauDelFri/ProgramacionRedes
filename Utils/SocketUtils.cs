@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -10,6 +11,8 @@ namespace Utils
     public class SocketUtils
     {
         private static int FixedMessageLengthSize = 9;
+        private static int FixedFileSectionSize = 1024;
+
         public static ProtocolItem RecieveMessage(Socket socket)
         {
             ProtocolItem item = RecieveHeader(socket);
@@ -61,6 +64,50 @@ namespace Utils
             {
                 sent += socket.Send(data, sent, data.Length - sent, SocketFlags.None);
             }
+        }
+
+        public static void SendFile(Socket socket, string filePath)
+        {
+            FileStream streamReader = new FileStream(filePath, FileMode.Open);
+            byte[] sectionToSend = new byte[FixedFileSectionSize];
+            for (int i = 0; i < streamReader.Length / FixedFileSectionSize; i++)
+            {
+                streamReader.Seek((FixedFileSectionSize * i), SeekOrigin.Begin);
+                streamReader.Read(sectionToSend, 0, FixedFileSectionSize);
+                int sent = 0;
+                while (sent < sectionToSend.Length)
+                {
+                    sent += socket.Send(sectionToSend, sent, sectionToSend.Length - sent, SocketFlags.None);
+                }
+
+                long bytesPendingToRead = streamReader.Length - (FixedFileSectionSize * i);
+                if (bytesPendingToRead <= FixedFileSectionSize)
+                {
+                    sectionToSend = new byte[bytesPendingToRead];
+                }
+            }
+
+            streamReader.Close();
+        }
+
+        public static string ReceiveFile(Socket socket, long fileLength, string filename)
+        {
+            string filePath = "./FilesSent/" + filename;
+            FileStream streamWriter = new FileStream(filePath, FileMode.Create);
+            for (int i = 0; i < fileLength / FixedFileSectionSize; i++)
+            {
+                int received = 0;
+                var data = new Byte[FixedFileSectionSize];
+                while (received < data.Length)
+                {
+                    received += socket.Receive(data, received, data.Length, SocketFlags.None);
+                }
+
+                streamWriter.Write(data, 0, FixedFileSectionSize);
+            }
+
+            streamWriter.Close();
+            return filePath;
         }
     }
 
