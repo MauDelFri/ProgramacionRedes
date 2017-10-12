@@ -1,7 +1,0 @@
-C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Domain\bin\Release\Domain.dll
-C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Domain\bin\Release\Domain.pdb
-C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Domain\bin\Release\Utils.dll
-C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Domain\bin\Release\Utils.pdb
-C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Domain\obj\Release\Domain.csprojResolveAssemblyReference.cache
-C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Domain\obj\Release\Domain.dll
-C:\Users\Mauricio\Desktop\ORT\Programacion de redes\Obligatorio\Obligarorio1\Domain\obj\Release\Domain.pdb
