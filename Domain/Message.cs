@@ -8,6 +8,7 @@ using Utils;
 
 namespace Domain
 {
+    [Serializable]
     public class Message
     {
         public String Text { get; set; }

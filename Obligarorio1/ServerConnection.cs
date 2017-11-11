@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -11,8 +12,14 @@ namespace Obligarorio1
 {
     public class ServerConnection
     {
+        public static List<HandleClient> ConnectedClients { get; set; }
+        public static RepositoryAccesor RepositoryAccesor { get; set; }
+
         public ServerConnection(string serverIp, int serverPort)
         {
+            ConnectedClients = new List<HandleClient>();
+            RepositoryAccesor = new RepositoryAccesor();
+            RepositoryAccesor.Initialize();
             var serverIPEndPoint = new IPEndPoint(IPAddress.Parse(serverIp), serverPort);
             var serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             serverSocket.Bind(serverIPEndPoint);
@@ -30,6 +37,21 @@ namespace Obligarorio1
 
             Console.ReadLine();
             serverSocket.Close();
+        }
+
+        public static bool IsUserConnected(User user)
+        {
+            return ConnectedClients.Where(s => s.CurrentSession.User.Equals(user)).ToList().Count() > 0;
+        }
+
+        public static HandleClient GetUserSession(User user)
+        {
+            return ConnectedClients.Find(s => s.CurrentSession.User.Equals(user));
+        }
+
+        public static void DisconnectUser(User user)
+        {
+            ConnectedClients.Remove(GetUserSession(user));
         }
     }
 }

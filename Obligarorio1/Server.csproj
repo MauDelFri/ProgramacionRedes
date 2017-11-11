@@ -55,6 +55,7 @@
       <HintPath>..\packages\System.Reactive.Windows.Threading.3.1.1\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -85,7 +86,7 @@
     <Compile Include="Logic\ServerLogic.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository.cs" />
+    <Compile Include="RepositoryAccesor.cs" />
     <Compile Include="ServerConnection.cs" />
     <Compile Include="Logic\ServerService.cs" />
     <EmbeddedResource Include="FrontEnd\Connection.resx">
@@ -121,6 +122,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{06a445af-200a-430e-895d-52521c27fb3d}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{275aa6ed-1f69-40b5-8374-fd5b2a71f5f8}</Project>
+      <Name>Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1d70a0cf-65de-4f91-b287-1749279d8c51}</Project>

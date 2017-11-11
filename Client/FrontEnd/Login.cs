@@ -26,15 +26,14 @@ namespace Obligarorio1
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            this.service.SendTestFile();
-            //try
-            //{
-            //    this.service.TryLogin(this.txtUsername.Text, this.txtPassword.Text);
-            //}
-            //catch (Exception exception)
-            //{
-            //    this.lblError.Text = exception.Message;
-            //}
+            try
+            {
+                this.service.TryLogin(this.txtUsername.Text, this.txtPassword.Text);
+            }
+            catch (Exception exception)
+            {
+                this.lblError.Text = exception.Message;
+            }
         }
 
         private void OnLoginError(string message)

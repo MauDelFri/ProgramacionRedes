@@ -38,28 +38,28 @@ namespace Obligarorio1
             string[] userProperties = this.Parser.GetUser(data);
             User user = new User(userProperties[0], userProperties[1]);
 
-            if (Repository.ExistsUser(user.Username))
+            if (ServerConnection.RepositoryAccesor.ExistsUser(user.Username))
             {
                 this.UserExistsAtLogin(user);
             }
             else
             {
-                Repository.Users.Add(user);
+                ServerConnection.RepositoryAccesor.AddUser(user);
                 this.LoginSuccess(user);
             }
         }
 
         private void UserExistsAtLogin(User user)
         {
-            if (Repository.AreUsersCredentialsCorrect(user))
+            if (ServerConnection.RepositoryAccesor.AreUsersCredentialsCorrect(user))
             {
-                if (Repository.IsUserConnected(user))
+                if (ServerConnection.IsUserConnected(user))
                 {
                     throw new UserAlreadyConnectedException();
                 }
                 else
                 {
-                    user = Repository.GetUserFromUsername(user.Username);
+                    user = ServerConnection.RepositoryAccesor.GetUserFromUsername(user.Username);
                     this.LoginSuccess(user);
                 }
             }
@@ -73,7 +73,7 @@ namespace Obligarorio1
         {
             user.TimesConnected++;
             this.handleClient.CurrentSession = new Session(user);
-            Repository.ConnectedClients.Add(this.handleClient);
+            ServerConnection.ConnectedClients.Add(this.handleClient);
             this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.LOGIN_CODE, Constants.SUCCESS_RESPONSE);
         }
 
@@ -93,10 +93,10 @@ namespace Obligarorio1
         private void TryLogout(string data)
         {
             string username = this.Parser.GetString(data);
-            User user = Repository.GetUserFromUsername(username);
-            if (Repository.IsUserConnected(user))
+            User user = ServerConnection.RepositoryAccesor.GetUserFromUsername(username);
+            if (ServerConnection.IsUserConnected(user))
             {
-                Repository.DisconnectUser(user);
+                ServerConnection.DisconnectUser(user);
                 this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.LOGOUT_CODE, Constants.SUCCESS_RESPONSE);
             }
             else
@@ -120,7 +120,7 @@ namespace Obligarorio1
 
         private void TryGetConnectedUsers(string data)
         {
-            List<string> connectedUsernames = Repository.ConnectedClients.Select(s => s.CurrentSession.User.Username).ToList();
+            List<string> connectedUsernames = ServerConnection.ConnectedClients.Select(s => s.CurrentSession.User.Username).ToList();
             string connectedUsernamesMessage = connectedUsernames.First();
             foreach (var item in connectedUsernames.Skip(1))
             {   
@@ -174,9 +174,9 @@ namespace Obligarorio1
         private void TrySendFriendshipRequest(string data)
         {
             string username = this.Parser.GetString(data);
-            if (Repository.ExistsUser(username))
+            if (ServerConnection.RepositoryAccesor.ExistsUser(username))
             {
-                User user = Repository.GetUserFromUsername(username);
+                User user = ServerConnection.RepositoryAccesor.GetUserFromUsername(username);
                 if (user.PendingFriendship.Contains(this.handleClient.CurrentSession.User))
                 {
                     throw new UserAlreadyRequestException();
@@ -193,7 +193,7 @@ namespace Obligarorio1
                     user.Friends.Add(this.handleClient.CurrentSession.User);
                     this.handleClient.CurrentSession.User.RemovePendingFriendship(user);
                     this.handleClient.SendMessage(Constants.REQUEST_HEADER, Constants.FRIENDSHIP_ACCEPTED, user.Username + Constants.ATTRIBUTE_SEPARATOR + user.Friends.Count);
-                    HandleClient userSession = Repository.GetUserSession(user);
+                    HandleClient userSession = ServerConnection.GetUserSession(user);
                     userSession.SendMessage(Constants.REQUEST_HEADER, Constants.FRIENDSHIP_ACCEPTED,
                         this.handleClient.CurrentSession.User.Username + Constants.ATTRIBUTE_SEPARATOR +
                         this.handleClient.CurrentSession.User.Friends.Count);
@@ -202,9 +202,9 @@ namespace Obligarorio1
                 {
                     user.PendingFriendship.Add(this.handleClient.CurrentSession.User);
                     this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.SEND_FRIENDSHIP_REQUEST, Constants.SUCCESS_RESPONSE);
-                    if (Repository.IsUserConnected(user))
+                    if (ServerConnection.IsUserConnected(user))
                     {
-                        HandleClient userSession = Repository.GetUserSession(user);
+                        HandleClient userSession = ServerConnection.GetUserSession(user);
                         userSession.SendMessage(Constants.REQUEST_HEADER, Constants.SEND_FRIENDSHIP_REQUEST, this.handleClient.CurrentSession.User.Username);
                     }
                 }   
@@ -231,9 +231,9 @@ namespace Obligarorio1
         private void TryRespondFriendshipRequest(string data)
         {
             string[] dataArray = this.Parser.GetListAttribute(data);
-            if (Repository.ExistsUser(dataArray[0]))
+            if (ServerConnection.RepositoryAccesor.ExistsUser(dataArray[0]))
             {
-                User user = Repository.GetUserFromUsername(dataArray[0]);
+                User user = ServerConnection.RepositoryAccesor.GetUserFromUsername(dataArray[0]);
                 this.handleClient.CurrentSession.User.RemovePendingFriendship(user);
                 this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.RESPOND_FRIENDSHIP_REQUEST, Constants.SUCCESS_RESPONSE);
                 this.ProcessFriendshipResponseAction(dataArray, user);
@@ -248,9 +248,9 @@ namespace Obligarorio1
         {
             user.Friends.Add(this.handleClient.CurrentSession.User);
             this.handleClient.CurrentSession.User.Friends.Add(user);
-            if (Repository.IsUserConnected(user))
+            if (ServerConnection.IsUserConnected(user))
             {
-                HandleClient userSession = Repository.GetUserSession(user);
+                HandleClient userSession = ServerConnection.GetUserSession(user);
                 userSession.SendMessage(Constants.REQUEST_HEADER, Constants.FRIENDSHIP_ACCEPTED, 
                     this.handleClient.CurrentSession.User.Username + Constants.ATTRIBUTE_SEPARATOR + 
                     this.handleClient.CurrentSession.User.Friends.Count);
@@ -273,7 +273,7 @@ namespace Obligarorio1
         private void TrySendMessage(string data)
         {
             string[] dataArray = this.Parser.GetStringArray(data, 2);
-            if (Repository.ExistsUser(dataArray[0]))
+            if (ServerConnection.RepositoryAccesor.ExistsUser(dataArray[0]))
             {
                 this.ProcessMessageToSend(dataArray);
                 this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.SEND_MESSAGE, data);
@@ -286,12 +286,12 @@ namespace Obligarorio1
 
         private void ProcessMessageToSend(string[] dataArray)
         {
-            User user = Repository.GetUserFromUsername(dataArray[0]);
+            User user = ServerConnection.RepositoryAccesor.GetUserFromUsername(dataArray[0]);
             Message message = new Message(dataArray[1], this.handleClient.CurrentSession.User, user);
             user.PendingMessages.Add(message);
-            if (Repository.IsUserConnected(user))
+            if (ServerConnection.IsUserConnected(user))
             {
-                HandleClient userSession = Repository.GetUserSession(user);
+                HandleClient userSession = ServerConnection.GetUserSession(user);
                 userSession.SendMessage(Constants.REQUEST_HEADER, Constants.SEND_MESSAGE, message.FormatToSend());
             }
         }
@@ -312,9 +312,9 @@ namespace Obligarorio1
         private void TryGetPendingMessages(string data)
         {
             string username = this.Parser.GetString(data);
-            if (Repository.ExistsUser(username))
+            if (ServerConnection.RepositoryAccesor.ExistsUser(username))
             {
-                User user = Repository.GetUserFromUsername(username);
+                User user = ServerConnection.RepositoryAccesor.GetUserFromUsername(username);
                 List<Message> pendingMessages = user.PendingMessages;
                 string pendingMessagesData = this.GetPendingMessagesToSend(pendingMessages);
                 this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.GET_PENDING_MESSAGES, pendingMessagesData);
@@ -357,9 +357,9 @@ namespace Obligarorio1
         private void TryGetPendingFriendships(string data)
         {
             string username = this.Parser.GetString(data);
-            if (Repository.ExistsUser(username))
+            if (ServerConnection.RepositoryAccesor.ExistsUser(username))
             {
-                User user = Repository.GetUserFromUsername(username);
+                User user = ServerConnection.RepositoryAccesor.GetUserFromUsername(username);
                 List<User> pendingFriendships = user.PendingFriendship;
                 string pendingFriendshipsData = this.GetPendingFriendshipsToSend(pendingFriendships);
                 this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.GET_PENDING_FRIENDSHIPS, pendingFriendshipsData);

@@ -42,7 +42,7 @@ namespace Obligarorio1
 
                 if (message.Command == Constants.DISCONNECT_CLIENT)
                 {
-                    Repository.DisconnectUser(this.CurrentSession.User);
+                    ServerConnection.DisconnectUser(this.CurrentSession.User);
                     break;
                 }
 

@@ -14,19 +14,18 @@ namespace Obligarorio1.Logic
 
         public ServerLogic(string serverIp, int serverPort)
         {
-            Repository.Initialize();
             this.thread = new Thread(() => new ServerConnection(serverIp, serverPort));
             this.thread.Start();
         }
 
         public List<User> GetRegisteredUsers()
         {
-            return Repository.Users;
+            return ServerConnection.RepositoryAccesor.GetRegisteredUsers();
         }
 
         public List<Session> GetConnectedSessions()
         {
-            return Repository.ConnectedClients.Select(h => h.CurrentSession).ToList();
+            return ServerConnection.ConnectedClients.Select(h => h.CurrentSession).ToList();
         }
     }
 }
