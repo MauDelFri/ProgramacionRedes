@@ -14,10 +14,12 @@ namespace Obligarorio1
     {
         public static List<HandleClient> ConnectedClients { get; set; }
         public static RepositoryAccesor RepositoryAccesor { get; set; }
+        public static LogAccesor LogAccesor { get; set; }
 
         public ServerConnection(string serverIp, int serverPort)
         {
             ConnectedClients = new List<HandleClient>();
+            LogAccesor = new LogAccesor();
             RepositoryAccesor = new RepositoryAccesor();
             RepositoryAccesor.Initialize();
             var serverIPEndPoint = new IPEndPoint(IPAddress.Parse(serverIp), serverPort);

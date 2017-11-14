@@ -11,5 +11,11 @@ namespace Domain
     {
         public String Event { get; set; }
         public DateTime EventDate { get; set; }
+
+        public Log(String eventLog, DateTime eventDate)
+        {
+            this.Event = eventLog;
+            this.EventDate = EventDate;
+        }
     }
 }

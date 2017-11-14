@@ -49,14 +49,15 @@ namespace Client
             Store.GetInstance().user = new User(username, password);
         }
 
-        public void SendTestFile()
+        public void SendFileToUser(String filePath, String friendUsername)
         {
-            FileStream filestream = new FileStream("./Files/cancion.mp3", FileMode.Open);
-            ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.RECEIVE_FILE, filestream.Length + "-cancion.mp3");
+            FileStream filestream = new FileStream(filePath, FileMode.Open);
+            ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.RECEIVE_FILE, 
+                filestream.Length + Constants.ATTRIBUTE_SEPARATOR + filePath.Split('/').Last() + Constants.ATTRIBUTE_SEPARATOR + friendUsername);
             filestream.Close();
             SocketUtils.SendMessage(Store.GetInstance().socket, message);
             Thread.Sleep(1000);
-            SocketUtils.SendFile(Store.GetInstance().socket, "./Files/cancion.mp3");
+            SocketUtils.SendFile(Store.GetInstance().socket, filePath);
         }
 
         private void ProcessResponse(ProtocolItem response)
