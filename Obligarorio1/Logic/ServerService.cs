@@ -20,16 +20,23 @@ namespace Obligarorio1
             this.Parser = new ProtocolObjectsParser();
         }
 
+        public User GetCurrentUser()
+        {
+            return this.handleClient.CurrentSession.User;
+        }
+
         public void LoginService(string data)
         {
             try
             {
                 this.TryLogin(data);
+                ServerConnection.LogAccesor.LogMessage(new Log("Login successful user " + this.GetCurrentUser().Username, DateTime.Now));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.LOGIN_CODE, Constants.ERROR_RESPONSE + e.Message);
+                ServerConnection.LogAccesor.LogMessage(new Log("Login failed", DateTime.Now));
             }
         }
 
@@ -76,17 +83,19 @@ namespace Obligarorio1
             ServerConnection.ConnectedClients.Add(this.handleClient);
             this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.LOGIN_CODE, Constants.SUCCESS_RESPONSE);
         }
-
+        
         public void LogoutService(string data)
         {
             try
             {
                 this.TryLogout(data);
+                ServerConnection.LogAccesor.LogMessage(new Log("Logout successful user " + this.GetCurrentUser().Username, DateTime.Now));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.LOGOUT_CODE, Constants.ERROR_RESPONSE + e.Message);
+                ServerConnection.LogAccesor.LogMessage(new Log("Logout failed. User " + this.GetCurrentUser().Username, DateTime.Now));
             }
         }
 
@@ -110,11 +119,13 @@ namespace Obligarorio1
             try
             {
                 this.TryGetConnectedUsers(data);
+                ServerConnection.LogAccesor.LogMessage(new Log("Requested connected users by user " + this.GetCurrentUser().Username, DateTime.Now));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.CONNECTED_USERS, Constants.ERROR_RESPONSE + e.Message);
+                ServerConnection.LogAccesor.LogMessage(new Log("Connected users request failed. User " + this.GetCurrentUser().Username, DateTime.Now));
             }
         }
 
@@ -134,11 +145,13 @@ namespace Obligarorio1
             try
             {
                 this.TryGetFriends();
+                ServerConnection.LogAccesor.LogMessage(new Log("Requested friends by user " + this.GetCurrentUser().Username, DateTime.Now));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.GET_FRIENDS, Constants.ERROR_RESPONSE + e.Message);
+                ServerConnection.LogAccesor.LogMessage(new Log("Fiends request failed. User " + this.GetCurrentUser().Username, DateTime.Now));
             }
         }
 
@@ -162,18 +175,21 @@ namespace Obligarorio1
         {
             try
             {
-                this.TrySendFriendshipRequest(data);
+                string username = this.Parser.GetString(data);
+                this.TrySendFriendshipRequest(username);
+                ServerConnection.LogAccesor.LogMessage(new Log("Send friendship request by user " + 
+                    this.GetCurrentUser().Username + " to " + username, DateTime.Now));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.SEND_FRIENDSHIP_REQUEST, Constants.ERROR_RESPONSE + e.Message);
+                ServerConnection.LogAccesor.LogMessage(new Log("Send friendship request failed. User " + this.GetCurrentUser().Username, DateTime.Now));
             }
         }
 
-        private void TrySendFriendshipRequest(string data)
+        private void TrySendFriendshipRequest(string username)
         {
-            string username = this.Parser.GetString(data);
             if (ServerConnection.RepositoryAccesor.ExistsUser(username))
             {
                 User user = ServerConnection.RepositoryAccesor.GetUserFromUsername(username);
@@ -220,11 +236,13 @@ namespace Obligarorio1
             try
             {
                 this.TryRespondFriendshipRequest(data);
+                ServerConnection.LogAccesor.LogMessage(new Log("Friendship request responded by user " + this.GetCurrentUser().Username, DateTime.Now));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.RESPOND_FRIENDSHIP_REQUEST, Constants.ERROR_RESPONSE + e.Message);
+                ServerConnection.LogAccesor.LogMessage(new Log("Friendship request response failed. User " + this.GetCurrentUser().Username, DateTime.Now));
             }
         }
 
@@ -261,18 +279,20 @@ namespace Obligarorio1
         {
             try
             {
-                this.TrySendMessage(data);
+                string[] dataArray = this.Parser.GetStringArray(data, 2);
+                this.TrySendMessage(data, dataArray);
+                ServerConnection.LogAccesor.LogMessage(new Log("Message delivered from user " + this.GetCurrentUser().Username + " to user " + dataArray[0], DateTime.Now));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.SEND_MESSAGE, Constants.ERROR_RESPONSE + e.Message);
+                ServerConnection.LogAccesor.LogMessage(new Log("Send message failed. User " + this.GetCurrentUser().Username, DateTime.Now));
             }
         }
 
-        private void TrySendMessage(string data)
+        private void TrySendMessage(string data, string[] dataArray)
         {
-            string[] dataArray = this.Parser.GetStringArray(data, 2);
             if (ServerConnection.RepositoryAccesor.ExistsUser(dataArray[0]))
             {
                 this.ProcessMessageToSend(dataArray);
@@ -301,11 +321,13 @@ namespace Obligarorio1
             try
             {
                 this.TryGetPendingMessages(data);
+                ServerConnection.LogAccesor.LogMessage(new Log("Requested pending messages by user " + this.GetCurrentUser().Username, DateTime.Now));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.GET_PENDING_MESSAGES, Constants.ERROR_RESPONSE + e.Message);
+                ServerConnection.LogAccesor.LogMessage(new Log("Request pending messages failed. User " + this.GetCurrentUser().Username, DateTime.Now));
             }
         }
 
@@ -346,11 +368,13 @@ namespace Obligarorio1
             try
             {
                 this.TryGetPendingFriendships(data);
+                ServerConnection.LogAccesor.LogMessage(new Log("Requested pending friendship requests by user " + this.GetCurrentUser().Username, DateTime.Now));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.GET_PENDING_FRIENDSHIPS, Constants.ERROR_RESPONSE + e.Message);
+                ServerConnection.LogAccesor.LogMessage(new Log("Request pending friendships failed. User " + this.GetCurrentUser().Username, DateTime.Now));
             }
         }
 
@@ -391,11 +415,13 @@ namespace Obligarorio1
             try
             {
                 this.TryMessageRead(data);
+                ServerConnection.LogAccesor.LogMessage(new Log("Message read by username " + this.GetCurrentUser().Username, DateTime.Now));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.MESSAGE_READ, Constants.ERROR_RESPONSE + e.Message);
+                ServerConnection.LogAccesor.LogMessage(new Log("Message read failed. User " + this.GetCurrentUser().Username, DateTime.Now));
             }
         }
 
@@ -420,11 +446,13 @@ namespace Obligarorio1
             try
             {
                 this.TryReceiveFile(data);
+                ServerConnection.LogAccesor.LogMessage(new Log("File received, sended by user " + this.GetCurrentUser().Username, DateTime.Now));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 this.handleClient.SendMessage(Constants.RESPONSE_HEADER, Constants.MESSAGE_READ, Constants.ERROR_RESPONSE + e.Message);
+                ServerConnection.LogAccesor.LogMessage(new Log("File receive failed. User " + this.GetCurrentUser().Username, DateTime.Now));
             }
         }
 
