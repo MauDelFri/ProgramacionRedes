@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1E53F0CE-F67F-4023-B1CE-9F39C16DCD69}</ProjectGuid>
+    <ProjectGuid>{C3327717-FC9A-4955-9DCE-5C8B9067C197}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Obligarorio1</RootNamespace>
-    <AssemblyName>Obligarorio1</AssemblyName>
+    <RootNamespace>LogServer</RootNamespace>
+    <AssemblyName>LogServer</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -56,7 +56,6 @@
       <HintPath>..\packages\System.Reactive.Windows.Threading.3.1.1\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -70,32 +69,18 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrontEnd\Connection.cs">
+    <Compile Include="Logs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrontEnd\Connection.Designer.cs">
-      <DependentUpon>Connection.cs</DependentUpon>
+    <Compile Include="Logs.Designer.cs">
+      <DependentUpon>Logs.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrontEnd\Home.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrontEnd\Home.Designer.cs">
-      <DependentUpon>Home.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LogAccesor.cs" />
-    <Compile Include="Logic\FunctionalityMapper.cs" />
-    <Compile Include="Logic\HandleClient.cs" />
-    <Compile Include="Logic\ServerLogic.cs" />
+    <Compile Include="LogMessageReveiver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryAccesor.cs" />
-    <Compile Include="ServerConnection.cs" />
-    <Compile Include="Logic\ServerService.cs" />
-    <EmbeddedResource Include="FrontEnd\Connection.resx">
-      <DependentUpon>Connection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrontEnd\Home.resx">
-      <DependentUpon>Home.cs</DependentUpon>
+    <Compile Include="Store.cs" />
+    <EmbeddedResource Include="Logs.resx">
+      <DependentUpon>Logs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -122,15 +107,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{06a445af-200a-430e-895d-52521c27fb3d}</Project>
+      <Project>{06A445AF-200A-430E-895D-52521C27FB3D}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repository\Repository.csproj">
-      <Project>{275aa6ed-1f69-40b5-8374-fd5b2a71f5f8}</Project>
-      <Name>Repository</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
-      <Project>{1d70a0cf-65de-4f91-b287-1749279d8c51}</Project>
+      <Project>{1D70A0CF-65DE-4F91-B287-1749279D8C51}</Project>
       <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
