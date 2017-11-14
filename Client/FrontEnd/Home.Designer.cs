@@ -46,6 +46,8 @@
             this.buttonAccept = new System.Windows.Forms.Button();
             this.labelMessage = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
+            this.btnSendFile = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabUsers.SuspendLayout();
@@ -55,6 +57,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnSendFile);
             this.panel1.Controls.Add(this.txtMessage);
             this.panel1.Controls.Add(this.tabControlChat);
             this.panel1.Controls.Add(this.tabControl1);
@@ -68,9 +71,9 @@
             // 
             // txtMessage
             // 
-            this.txtMessage.Location = new System.Drawing.Point(272, 532);
+            this.txtMessage.Location = new System.Drawing.Point(272, 539);
             this.txtMessage.Name = "txtMessage";
-            this.txtMessage.Size = new System.Drawing.Size(596, 20);
+            this.txtMessage.Size = new System.Drawing.Size(554, 20);
             this.txtMessage.TabIndex = 12;
             this.txtMessage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMessage_KeyDown);
             // 
@@ -256,6 +259,20 @@
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
+            // btnSendFile
+            // 
+            this.btnSendFile.Image = global::Client.Properties.Resources.attach_file_black;
+            this.btnSendFile.Location = new System.Drawing.Point(835, 532);
+            this.btnSendFile.Name = "btnSendFile";
+            this.btnSendFile.Size = new System.Drawing.Size(33, 34);
+            this.btnSendFile.TabIndex = 13;
+            this.btnSendFile.UseVisualStyleBackColor = true;
+            this.btnSendFile.Click += new System.EventHandler(this.btnSendFile_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -295,5 +312,7 @@
         private System.Windows.Forms.TabControl tabControlChat;
         private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.Button btnChat;
+        private System.Windows.Forms.Button btnSendFile;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }

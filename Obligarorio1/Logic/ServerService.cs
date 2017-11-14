@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Utils.Exceptions;
+using System.IO;
 
 namespace Obligarorio1
 {
@@ -458,8 +459,9 @@ namespace Obligarorio1
 
         private void TryReceiveFile(string data)
         {
-            string[] messageData = this.Parser.GetStringArray(data, 2);
+            string[] messageData = this.Parser.GetStringArray(data, 3);
             string filepath = this.handleClient.ReceiveFile(long.Parse(messageData[0]), messageData[1]);
+            this.handleClient.SendFileToUser(filepath, messageData[2]);
         }
     }
 }

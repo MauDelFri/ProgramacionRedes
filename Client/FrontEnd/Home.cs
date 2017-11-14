@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Utils;
 using Domain;
+using System.IO;
 
 namespace Client
 {
@@ -309,6 +310,29 @@ namespace Client
                 this.service.Disconnect();
                 Application.ExitThread();
                 Environment.Exit(0);
+            }
+        }
+
+        private void btnSendFile_Click(object sender, EventArgs e)
+        {
+            if (this.chats.Count() > 0)
+            {
+                DialogResult result = openFileDialog.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string file = openFileDialog.FileName;
+                    try
+                    {
+                        if (File.Exists(file))
+                        {
+                            string friendUsername = this.tabControlChat.SelectedTab.Text;
+                            this.service.SendFileToUser(file, friendUsername);
+                        }
+                    }
+                    catch (IOException)
+                    {
+                    }
+                }
             }
         }
     }

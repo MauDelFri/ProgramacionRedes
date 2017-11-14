@@ -1,10 +1,12 @@
 ﻿using Domain;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Reactive.Subjects;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Utils;
 
@@ -79,6 +81,17 @@ namespace Obligarorio1
         public string ReceiveFile(long fileLength, string filename)
         {
             return SocketUtils.ReceiveFile(this.clientSocket, fileLength, filename);
+        }
+
+        public void SendFileToUser(String filePath, String friendUsername)
+        {
+            FileStream filestream = new FileStream(filePath, FileMode.Open);
+            ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.RECEIVE_FILE,
+                filestream.Length + Constants.ATTRIBUTE_SEPARATOR + filePath.Split('/').Last() + Constants.ATTRIBUTE_SEPARATOR + friendUsername);
+            filestream.Close();
+            SocketUtils.SendMessage(this.clientSocket, message);
+            Thread.Sleep(1000);
+            SocketUtils.SendFile(this.clientSocket, filePath);
         }
     }
 }
