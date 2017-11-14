@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Utils;
 
-namespace Obligarorio1
+namespace Client
 {
     public class HandleServer
     {
@@ -18,7 +18,7 @@ namespace Obligarorio1
         public HandleServer(Socket serverSocket)
         {
             this.serverSocket = serverSocket;
-            this.mapper = new ResponseMapper();
+            this.mapper = new ResponseMapper(this);
 
             while (true)
             {
@@ -51,6 +51,11 @@ namespace Obligarorio1
             responseMessage.MessageLength = System.Text.Encoding.ASCII.GetBytes(responseMessage.Data).Length;
 
             return responseMessage;
+        }
+
+        public string ReceiveFile(long fileLength, string filename)
+        {
+            return SocketUtils.ReceiveFile(this.clientSocket, fileLength, filename);
         }
     }
 }

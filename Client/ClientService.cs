@@ -18,9 +18,11 @@ namespace Client
     {
         private Thread thread;
         public ProtocolObjectsParser Parser;
+        private HandleServer handleServer;
 
-        public ClientService()
+        public ClientService(HandleServer handleServer)
         {
+            this.handleServer = handleServer;
             this.Parser = new ProtocolObjectsParser();
         }
 
@@ -287,6 +289,20 @@ namespace Client
             {
                 Store.GetInstance().LoginState.OnError(new ServerException(data.Replace(Constants.ERROR_RESPONSE, "")));
             }
+        }
+
+        private void ReceiveFile(string data)
+        {
+            if (data.StartsWith(Constants.ERROR_RESPONSE))
+            {
+                Store.GetInstance().FriendshipAcceptedState.OnError(new ServerException(data.Replace(Constants.ERROR_RESPONSE, "")));
+            }
+            else
+            {
+                Store.GetInstance().FriendshipAcceptedState.OnNext(data);
+            }
+            string[] messageData = this.Parser.GetStringArray(data, 2);
+            string filepath = this.handleServer.ReceiveFile(long.Parse(messageData[0]), messageData[1]);
         }
 
         #endregion

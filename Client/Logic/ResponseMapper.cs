@@ -6,15 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Utils;
 
-namespace Obligarorio1
+namespace Client
 {
     public class ResponseMapper
     {
         public ClientService service { get; set; }
 
-        public ResponseMapper()
+        public ResponseMapper(HandleServer handleServer)
         {
-            service = new ClientService();
+            this.service = new ClientService(handleServer);
         }
 
         public void MapHeaderToAction(ProtocolItem message)
@@ -81,6 +81,9 @@ namespace Obligarorio1
                     break;
                 case Constants.FRIENDSHIP_ACCEPTED:
                     service.FriendshipAccepted(message.Data);
+                    break;
+                case Constants.RECEIVE_FILE:
+                    service.ReceiveFile(message.Data);
                     break;
                 default:
                     break;
