@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="40eb3bf7-37b2-4c6e-85eb-9ee69b22ca6a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:6201/UserManagementServer/UserManagementService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="cf381765-1c72-4814-ab76-877bb5b0ef0e" SourceId="1" SourceUrl="http://localhost:6201/UserManagementServer/UserManagementService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="d8e14715-78a7-4573-9b3b-b5bafa3e1605" SourceId="1" SourceUrl="http://localhost:6201/UserManagementServer/UserManagementService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="5515eb7b-2b98-4156-9dd5-e710cf88bedd" SourceId="1" SourceUrl="http://localhost:6201/UserManagementServer/UserManagementService/mex" />
+    <MetadataFile FileName="Domain.xsd" MetadataType="Schema" ID="8f5df34d-ac45-41ef-b97a-3f6e5415eebb" SourceId="1" SourceUrl="http://localhost:6201/UserManagementServer/UserManagementService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -57,6 +57,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -125,9 +126,9 @@
       <Project>{06a445af-200a-430e-895d-52521c27fb3d}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repository\Repository.csproj">
-      <Project>{275aa6ed-1f69-40b5-8374-fd5b2a71f5f8}</Project>
-      <Name>Repository</Name>
+    <ProjectReference Include="..\UserManagementServer\UserManagementServer.csproj">
+      <Project>{EC4A6592-8FD8-44B7-AD20-7B7D88071603}</Project>
+      <Name>UserManagementServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1d70a0cf-65de-4f91-b287-1749279d8c51}</Project>

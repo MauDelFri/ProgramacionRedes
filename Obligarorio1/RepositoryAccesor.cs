@@ -7,6 +7,7 @@ using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 using Domain;
+using Repository;
 
 namespace Obligarorio1
 {
@@ -16,13 +17,13 @@ namespace Obligarorio1
 
         public RepositoryAccesor()
         {
-            TcpChannel serverChannel = new TcpChannel(6200);
+            TcpChannel serverChannel = new TcpChannel(6100);
             try
             {
                 ChannelServices.RegisterChannel(serverChannel, false);
                 RemotingConfiguration.RegisterWellKnownServiceType(typeof(Repository.Repository), "Repository", WellKnownObjectMode.Singleton);
                 Console.WriteLine("Remoting service started ...\n\n");
-                this.repository = (Repository.Repository)Activator.GetObject((typeof(Repository.Repository)), "tcp://localhost:6200/Repository");
+                this.repository = (Repository.Repository)Activator.GetObject((typeof(Repository.Repository)), "tcp://localhost:6100/Repository");
             }
             catch (Exception)
             {

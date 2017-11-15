@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain
 {
     [Serializable]
+    [DataContract]
     public class User
     {
-        public String Username { get; set; }
-        public String Password { get; set; }
+        [DataMember]
+        public string Username { get; set; }
+        [DataMember]
+        public string Password { get; set; }
         public List<User> Friends { get; set; }
         public List<User> PendingFriendship { get; set; }
         public List<Message> PendingMessages { get; set; }
