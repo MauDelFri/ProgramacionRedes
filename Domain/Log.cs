@@ -12,6 +12,8 @@ namespace Domain
         public String Event { get; set; }
         public DateTime EventDate { get; set; }
 
+        public Log() { }
+
         public Log(String eventLog, DateTime eventDate)
         {
             this.Event = eventLog;

@@ -51,9 +51,10 @@ namespace Client
 
         public void SendFileToUser(String filePath, String friendUsername)
         {
+            string fileName = filePath.Split('\\').Last().Replace("-", "");
             FileStream filestream = new FileStream(filePath, FileMode.Open);
             ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.RECEIVE_FILE, 
-                filestream.Length + Constants.ATTRIBUTE_SEPARATOR + filePath.Split('/').Last() + Constants.ATTRIBUTE_SEPARATOR + friendUsername);
+                filestream.Length.ToString() + Constants.ATTRIBUTE_SEPARATOR + fileName + Constants.ATTRIBUTE_SEPARATOR + friendUsername);
             filestream.Close();
             SocketUtils.SendMessage(Store.GetInstance().socket, message);
             Thread.Sleep(1000);
@@ -292,18 +293,19 @@ namespace Client
             }
         }
 
-        private void ReceiveFile(string data)
+        public void ReceiveFile(string data)
         {
             if (data.StartsWith(Constants.ERROR_RESPONSE))
             {
-                Store.GetInstance().FriendshipAcceptedState.OnError(new ServerException(data.Replace(Constants.ERROR_RESPONSE, "")));
+                Store.GetInstance().ReceiveMessagesState.OnError(new ServerException(data.Replace(Constants.ERROR_RESPONSE, "")));
             }
             else
             {
-                Store.GetInstance().FriendshipAcceptedState.OnNext(data);
+                string[] messageData = this.Parser.GetStringArray(data, 3);
+                string filepath = this.handleServer.ReceiveFile(long.Parse(messageData[0]), messageData[1]);
+                Message message = new Message(new User(messageData[2]), DateTime.Now.ToString(Constants.DATE_FORMAT), "Archivo " + messageData[1] + " recibido");
+                Store.GetInstance().ReceiveMessagesState.OnNext(message);
             }
-            string[] messageData = this.Parser.GetStringArray(data, 2);
-            string filepath = this.handleServer.ReceiveFile(long.Parse(messageData[0]), messageData[1]);
         }
 
         #endregion

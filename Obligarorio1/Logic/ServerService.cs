@@ -461,7 +461,12 @@ namespace Obligarorio1
         {
             string[] messageData = this.Parser.GetStringArray(data, 3);
             string filepath = this.handleClient.ReceiveFile(long.Parse(messageData[0]), messageData[1]);
-            this.handleClient.SendFileToUser(filepath, messageData[2]);
+            User user = ServerConnection.RepositoryAccesor.GetUserFromUsername(messageData[2]);
+            if (ServerConnection.IsUserConnected(user))
+            {
+                HandleClient userSession = ServerConnection.GetUserSession(user);
+                userSession.SendFileToUser(filepath, this.handleClient.CurrentSession.User.Username);
+            }
         }
     }
 }

@@ -20,13 +20,9 @@ namespace Obligarorio1
             try
             {
                 ChannelServices.RegisterChannel(serverChannel, false);
-                RemotingConfiguration.RegisterWellKnownServiceType(
-                    typeof(Repository.Repository),
-                    "Repository",
-                    WellKnownObjectMode.Singleton);
+                RemotingConfiguration.RegisterWellKnownServiceType(typeof(Repository.Repository), "Repository", WellKnownObjectMode.Singleton);
                 Console.WriteLine("Remoting service started ...\n\n");
-                this.repository = (Repository.Repository)Activator.GetObject((typeof(Repository.Repository)),
-                    "tcp://localhost:6200/Repository");
+                this.repository = (Repository.Repository)Activator.GetObject((typeof(Repository.Repository)), "tcp://localhost:6200/Repository");
             }
             catch (Exception)
             {

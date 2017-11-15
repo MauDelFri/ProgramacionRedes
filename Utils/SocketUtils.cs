@@ -93,6 +93,7 @@ namespace Utils
         public static string ReceiveFile(Socket socket, long fileLength, string filename)
         {
             string filePath = "./FilesSent/" + filename;
+            (new FileInfo(filePath)).Directory.Create();
             FileStream streamWriter = new FileStream(filePath, FileMode.Create);
             for (int i = 0; i < fileLength / FixedFileSectionSize; i++)
             {

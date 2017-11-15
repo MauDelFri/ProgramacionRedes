@@ -87,7 +87,7 @@ namespace Obligarorio1
         {
             FileStream filestream = new FileStream(filePath, FileMode.Open);
             ProtocolItem message = new ProtocolItem(Constants.REQUEST_HEADER, Constants.RECEIVE_FILE,
-                filestream.Length + Constants.ATTRIBUTE_SEPARATOR + filePath.Split('/').Last() + Constants.ATTRIBUTE_SEPARATOR + friendUsername);
+                filestream.Length.ToString() + Constants.ATTRIBUTE_SEPARATOR + filePath.Split('/').Last() + Constants.ATTRIBUTE_SEPARATOR + friendUsername);
             filestream.Close();
             SocketUtils.SendMessage(this.clientSocket, message);
             Thread.Sleep(1000);

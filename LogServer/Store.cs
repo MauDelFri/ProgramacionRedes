@@ -18,6 +18,7 @@ namespace LogServer
 
         private Store()
         {
+            this.Logs = new List<Log>();
             this.LogsPublish = new ReplaySubject<List<Log>>();
         }
 

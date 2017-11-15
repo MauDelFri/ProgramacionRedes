@@ -55,7 +55,7 @@ namespace Client
 
         public string ReceiveFile(long fileLength, string filename)
         {
-            return SocketUtils.ReceiveFile(this.clientSocket, fileLength, filename);
+            return SocketUtils.ReceiveFile(this.serverSocket, fileLength, filename);
         }
     }
 }

@@ -7,11 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Client;
 using Client.Logic;
 using Utils;
 
-namespace Obligarorio1
+namespace Client
 {
     public partial class Login : Form
     {
@@ -20,7 +19,7 @@ namespace Obligarorio1
         public Login()
         {
             InitializeComponent();
-            this.service = new ClientService();
+            this.service = new ClientService(null);
             Store.GetInstance().LoginState.Subscribe(data => this.OnLoginSuccess(), error => this.OnLoginError(error.Message));
         }
 
