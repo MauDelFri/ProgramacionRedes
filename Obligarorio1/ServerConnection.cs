@@ -41,11 +41,6 @@ namespace Obligarorio1
             serverSocket.Close();
         }
 
-        public static bool IsUserConnected(User user)
-        {
-            return ConnectedClients.Where(s => s.CurrentSession.User.Equals(user)).ToList().Count() > 0;
-        }
-
         public static HandleClient GetUserSession(User user)
         {
             return ConnectedClients.Find(s => s.CurrentSession.User.Equals(user));

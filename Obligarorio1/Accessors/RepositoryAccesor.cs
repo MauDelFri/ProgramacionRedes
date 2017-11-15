@@ -7,13 +7,13 @@ using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 using Domain;
-using Repository;
+using UserManagementServer;
 
 namespace Obligarorio1
 {
     public class RepositoryAccesor
     {
-        private Repository.Repository repository;
+        private Repository repository;
 
         public RepositoryAccesor()
         {
@@ -21,14 +21,19 @@ namespace Obligarorio1
             try
             {
                 ChannelServices.RegisterChannel(serverChannel, false);
-                RemotingConfiguration.RegisterWellKnownServiceType(typeof(Repository.Repository), "Repository", WellKnownObjectMode.Singleton);
+                RemotingConfiguration.RegisterWellKnownServiceType(typeof(Repository), "Repository", WellKnownObjectMode.Singleton);
                 Console.WriteLine("Remoting service started ...\n\n");
-                this.repository = (Repository.Repository)Activator.GetObject((typeof(Repository.Repository)), "tcp://localhost:6100/Repository");
+                this.repository = (Repository)Activator.GetObject((typeof(Repository)), "tcp://localhost:6100/Repository");
             }
             catch (Exception)
             {
                 ChannelServices.UnregisterChannel(serverChannel);
             }
+        }
+
+        public List<Session> GetConnectedSessions()
+        {
+            return this.repository.GetConnectedSessions();
         }
 
         public void Initialize()
@@ -64,6 +69,26 @@ namespace Obligarorio1
         public void AddUser(User user)
         {
             this.repository.AddUser(user);
+        }
+
+        public bool IsUserConnected(User user)
+        {
+            return this.repository.IsUserConnected(user);
+        }
+
+        public void DisconnectUser(User user)
+        {
+            this.repository.DisconnectUser(user);
+        }
+
+        public void ConnectUserSession(Session currentSession)
+        {
+            this.repository.ConnectUserSession(currentSession);
+        }
+
+        public void SaveUser(User user)
+        {
+            this.repository.SaveUser(user);
         }
     }
 }

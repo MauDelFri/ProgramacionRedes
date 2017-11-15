@@ -8,24 +8,35 @@ namespace UserManagementServer
 {
     public class UserManagementService : IUserManagementService
     {
+        public static RepositoryAccesor RepositoryAccesor;
+
+        public UserManagementService()
+        {
+            RepositoryAccesor = new RepositoryAccesor();
+        }
+
         public void AddUser(User user)
         {
-            throw new NotImplementedException();
+            user.TimesConnected = 0;
+            user.Friends = new List<User>();
+            user.PendingFriendship = new List<User>();
+            user.PendingMessages = new List<Message>();
+            RepositoryAccesor.AddUser(user);
         }
 
         public void DeleteUser(User user)
         {
-            throw new NotImplementedException();
+            RepositoryAccesor.DeleteUser(user);
         }
 
         public List<User> GetUsers()
         {
-            throw new NotImplementedException();
+            return RepositoryAccesor.GetRegisteredUsers();
         }
 
         public void ModifyUser(string username, User newUser)
         {
-            throw new NotImplementedException();
+            RepositoryAccesor.ModifyUser(username, newUser);
         }
     }
 }

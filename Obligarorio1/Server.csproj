@@ -83,13 +83,13 @@
     <Compile Include="FrontEnd\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogAccesor.cs" />
+    <Compile Include="Accessors\LogAccesor.cs" />
     <Compile Include="Logic\FunctionalityMapper.cs" />
     <Compile Include="Logic\HandleClient.cs" />
     <Compile Include="Logic\ServerLogic.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryAccesor.cs" />
+    <Compile Include="Accessors\RepositoryAccesor.cs" />
     <Compile Include="ServerConnection.cs" />
     <Compile Include="Logic\ServerService.cs" />
     <EmbeddedResource Include="FrontEnd\Connection.resx">
@@ -127,7 +127,7 @@
       <Name>Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\UserManagementServer\UserManagementServer.csproj">
-      <Project>{EC4A6592-8FD8-44B7-AD20-7B7D88071603}</Project>
+      <Project>{ec4a6592-8fd8-44b7-ad20-7b7d88071603}</Project>
       <Name>UserManagementServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">

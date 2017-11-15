@@ -37,7 +37,12 @@ namespace Client
 
         private void OnLoginError(string message)
         {
-            this.lblError.Text = message;
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => {
+                    this.lblError.Text = message;
+                }));
+            }
         }
 
         private void OnLoginSuccess()
