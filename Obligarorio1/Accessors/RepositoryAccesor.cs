@@ -7,7 +7,7 @@ using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 using Domain;
-using UserManagementServer;
+using DataAccess;
 
 namespace Obligarorio1
 {

@@ -126,9 +126,9 @@
       <Project>{06a445af-200a-430e-895d-52521c27fb3d}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UserManagementServer\UserManagementServer.csproj">
-      <Project>{ec4a6592-8fd8-44b7-ad20-7b7d88071603}</Project>
-      <Name>UserManagementServer</Name>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{06d9d42e-602c-4dca-b3c7-95954ec74891}</Project>
+      <Name>Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1d70a0cf-65de-4f91-b287-1749279d8c51}</Project>

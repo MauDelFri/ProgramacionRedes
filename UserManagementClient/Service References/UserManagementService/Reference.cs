@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UserManagementClient.UserManagementServer {
+namespace UserManagementClient.UserManagementService {
     using System.Runtime.Serialization;
     using System;
     
@@ -75,29 +75,41 @@ namespace UserManagementClient.UserManagementServer {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UserManagementServer.IUserManagementService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UserManagementService.IUserManagementService")]
     public interface IUserManagementService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserManagementService/GetUsers", ReplyAction="http://tempuri.org/IUserManagementService/GetUsersResponse")]
-        System.Collections.Generic.List<UserManagementClient.UserManagementServer.User> GetUsers();
+        System.Collections.Generic.List<UserManagementClient.UserManagementService.User> GetUsers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserManagementService/GetUsers", ReplyAction="http://tempuri.org/IUserManagementService/GetUsersResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<UserManagementClient.UserManagementService.User>> GetUsersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserManagementService/AddUser", ReplyAction="http://tempuri.org/IUserManagementService/AddUserResponse")]
-        void AddUser(UserManagementClient.UserManagementServer.User user);
+        void AddUser(UserManagementClient.UserManagementService.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserManagementService/AddUser", ReplyAction="http://tempuri.org/IUserManagementService/AddUserResponse")]
+        System.Threading.Tasks.Task AddUserAsync(UserManagementClient.UserManagementService.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserManagementService/ModifyUser", ReplyAction="http://tempuri.org/IUserManagementService/ModifyUserResponse")]
-        void ModifyUser(string username, UserManagementClient.UserManagementServer.User newUser);
+        void ModifyUser(string username, UserManagementClient.UserManagementService.User newUser);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserManagementService/ModifyUser", ReplyAction="http://tempuri.org/IUserManagementService/ModifyUserResponse")]
+        System.Threading.Tasks.Task ModifyUserAsync(string username, UserManagementClient.UserManagementService.User newUser);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserManagementService/DeleteUser", ReplyAction="http://tempuri.org/IUserManagementService/DeleteUserResponse")]
-        void DeleteUser(UserManagementClient.UserManagementServer.User user);
+        void DeleteUser(UserManagementClient.UserManagementService.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserManagementService/DeleteUser", ReplyAction="http://tempuri.org/IUserManagementService/DeleteUserResponse")]
+        System.Threading.Tasks.Task DeleteUserAsync(UserManagementClient.UserManagementService.User user);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IUserManagementServiceChannel : UserManagementClient.UserManagementServer.IUserManagementService, System.ServiceModel.IClientChannel {
+    public interface IUserManagementServiceChannel : UserManagementClient.UserManagementService.IUserManagementService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class UserManagementServiceClient : System.ServiceModel.ClientBase<UserManagementClient.UserManagementServer.IUserManagementService>, UserManagementClient.UserManagementServer.IUserManagementService {
+    public partial class UserManagementServiceClient : System.ServiceModel.ClientBase<UserManagementClient.UserManagementService.IUserManagementService>, UserManagementClient.UserManagementService.IUserManagementService {
         
         public UserManagementServiceClient() {
         }
@@ -118,20 +130,36 @@ namespace UserManagementClient.UserManagementServer {
                 base(binding, remoteAddress) {
         }
         
-        public System.Collections.Generic.List<UserManagementClient.UserManagementServer.User> GetUsers() {
+        public System.Collections.Generic.List<UserManagementClient.UserManagementService.User> GetUsers() {
             return base.Channel.GetUsers();
         }
         
-        public void AddUser(UserManagementClient.UserManagementServer.User user) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<UserManagementClient.UserManagementService.User>> GetUsersAsync() {
+            return base.Channel.GetUsersAsync();
+        }
+        
+        public void AddUser(UserManagementClient.UserManagementService.User user) {
             base.Channel.AddUser(user);
         }
         
-        public void ModifyUser(string username, UserManagementClient.UserManagementServer.User newUser) {
+        public System.Threading.Tasks.Task AddUserAsync(UserManagementClient.UserManagementService.User user) {
+            return base.Channel.AddUserAsync(user);
+        }
+        
+        public void ModifyUser(string username, UserManagementClient.UserManagementService.User newUser) {
             base.Channel.ModifyUser(username, newUser);
         }
         
-        public void DeleteUser(UserManagementClient.UserManagementServer.User user) {
+        public System.Threading.Tasks.Task ModifyUserAsync(string username, UserManagementClient.UserManagementService.User newUser) {
+            return base.Channel.ModifyUserAsync(username, newUser);
+        }
+        
+        public void DeleteUser(UserManagementClient.UserManagementService.User user) {
             base.Channel.DeleteUser(user);
+        }
+        
+        public System.Threading.Tasks.Task DeleteUserAsync(UserManagementClient.UserManagementService.User user) {
+            return base.Channel.DeleteUserAsync(user);
         }
     }
 }
