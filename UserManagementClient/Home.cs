@@ -85,6 +85,7 @@ namespace UserManagementClient
                 if (this.IsValidAddUser(newUser))
                 {
                     this.service.AddUser(newUser);
+                    this.AddUsersToListView(this.service.GetUsers());
                 }
             }
             else
@@ -93,12 +94,14 @@ namespace UserManagementClient
                 {
                     int selectedIndex = this.listRegisteredClients.Items.IndexOf(this.listRegisteredClients.SelectedItems[0]);
                     User selectedUser = this.users.ElementAt(selectedIndex);
-                    if(this.IsValidModifyUser(selectedUser.Username, newUser))
-                    this.service.ModifyUser(selectedUser.Username, newUser);
+                    if (this.IsValidModifyUser(selectedUser.Username, newUser))
+                    {
+                        this.service.ModifyUser(selectedUser.Username, newUser);
+                        this.AddUsersToListView(this.service.GetUsers());
+                    }
                 }
             }
 
-            this.AddUsersToListView(this.service.GetUsers());
         }
 
         private bool IsValidAddUser(User newUser)
@@ -116,7 +119,7 @@ namespace UserManagementClient
                 this.lblError.Text = "";
             }
 
-            return this.lblError.Text != "";
+            return this.lblError.Text == "";
         }
 
         private bool IsValidModifyUser(string oldUsername, User newUser)
@@ -138,7 +141,7 @@ namespace UserManagementClient
                 this.lblError.Text = "";
             }
 
-            return this.lblError.Text != "";
+            return this.lblError.Text == "";
         }
 
         private void listRegisteredClients_SelectedIndexChanged(object sender, EventArgs e)
