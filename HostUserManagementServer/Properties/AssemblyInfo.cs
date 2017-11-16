@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // La información general de un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("UserManagementServerConnection")]
+[assembly: AssemblyTitle("HostUserManagementServer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("UserManagementServerConnection")]
+[assembly: AssemblyProduct("HostUserManagementServer")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // El siguiente GUID sirve como id. de typelib si este proyecto se expone a COM.
-[assembly: Guid("02c71e00-3e70-4b5c-bcf0-1b6c425c6531")]
+[assembly: Guid("43aa78ca-5ca6-4bc1-8405-6a9f030ae746")]
 
 // La información de versión de un ensamblado consta de los cuatro valores siguientes:
 //

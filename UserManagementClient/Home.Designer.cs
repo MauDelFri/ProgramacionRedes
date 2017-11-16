@@ -44,6 +44,7 @@
             this.columnPassword = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
             this.btnUpdateClients = new System.Windows.Forms.Button();
+            this.lblError = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.clientsPanel.SuspendLayout();
@@ -66,6 +67,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel2.Controls.Add(this.lblError);
             this.panel2.Controls.Add(this.btnConfirm);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label2);
@@ -80,7 +82,7 @@
             // 
             this.btnConfirm.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConfirm.Location = new System.Drawing.Point(220, 195);
+            this.btnConfirm.Location = new System.Drawing.Point(223, 212);
             this.btnConfirm.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(97, 34);
@@ -223,6 +225,15 @@
             this.btnUpdateClients.UseVisualStyleBackColor = false;
             this.btnUpdateClients.Click += new System.EventHandler(this.btnUpdateClients_Click);
             // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(139, 178);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(0, 18);
+            this.lblError.TabIndex = 8;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -260,6 +271,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.Label lblError;
     }
 }
 

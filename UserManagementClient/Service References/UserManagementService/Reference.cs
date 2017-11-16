@@ -101,6 +101,18 @@ namespace UserManagementClient.UserManagementService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserManagementService/DeleteUser", ReplyAction="http://tempuri.org/IUserManagementService/DeleteUserResponse")]
         System.Threading.Tasks.Task DeleteUserAsync(UserManagementClient.UserManagementService.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserManagementService/ExistsUser", ReplyAction="http://tempuri.org/IUserManagementService/ExistsUserResponse")]
+        bool ExistsUser(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserManagementService/ExistsUser", ReplyAction="http://tempuri.org/IUserManagementService/ExistsUserResponse")]
+        System.Threading.Tasks.Task<bool> ExistsUserAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserManagementService/IsUserConnected", ReplyAction="http://tempuri.org/IUserManagementService/IsUserConnectedResponse")]
+        bool IsUserConnected(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserManagementService/IsUserConnected", ReplyAction="http://tempuri.org/IUserManagementService/IsUserConnectedResponse")]
+        System.Threading.Tasks.Task<bool> IsUserConnectedAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -160,6 +172,22 @@ namespace UserManagementClient.UserManagementService {
         
         public System.Threading.Tasks.Task DeleteUserAsync(UserManagementClient.UserManagementService.User user) {
             return base.Channel.DeleteUserAsync(user);
+        }
+        
+        public bool ExistsUser(string username) {
+            return base.Channel.ExistsUser(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ExistsUserAsync(string username) {
+            return base.Channel.ExistsUserAsync(username);
+        }
+        
+        public bool IsUserConnected(string username) {
+            return base.Channel.IsUserConnected(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsUserConnectedAsync(string username) {
+            return base.Channel.IsUserConnectedAsync(username);
         }
     }
 }

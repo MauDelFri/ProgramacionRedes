@@ -20,7 +20,7 @@ namespace LogServer
         public Logs()
         {
             InitializeComponent();
-            this.thread = new Thread(() => new LogMessageReveiver());
+            this.thread = new Thread(() => new LogMessageReceiver());
             this.thread.Start();
             Store.GetInstance().LogsPublish.Subscribe(data => this.OnLogPublished(data));
         }
@@ -31,12 +31,13 @@ namespace LogServer
             {
                 this.Invoke(new Action(() =>
                 {
-                    logs = logs.OrderByDescending(l => l.EventDate).ToList();
-                    List<ListViewItem> items = logs.Select(l => new ListViewItem(new string[] { l.Event, l.EventDate.ToString(Constants.DATE_FORMAT) })).ToList();
-                    this.listLogs.Clear();
+                    logs = logs.OrderByDescending(l => DateTime.ParseExact(l.EventDate, Constants.DATE_FORMAT, null)).ToList();
+                    List<ListViewItem> items = logs.Select(l => new ListViewItem(new string[] { l.Event, l.EventDate })).ToList();
+                    this.listLogs.Items.Clear();
                     this.listLogs.Items.AddRange(items.ToArray());
                 }));
             }
         }
     }
 }
+

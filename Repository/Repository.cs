@@ -84,9 +84,9 @@ namespace DataAccess
 
         #region Session
 
-        public bool IsUserConnected(User user)
+        public bool IsUserConnected(string username)
         {
-            return ConnectedUsers.Where(s => s.User.Equals(user)).ToList().Count() > 0;
+            return ConnectedUsers.Where(s => s.User.Username.Equals(username)).ToList().Count() > 0;
         }
 
         public void ConnectUserSession(Session currentSession)
@@ -102,7 +102,7 @@ namespace DataAccess
             user.PendingFriendship = userToSave.PendingFriendship;
             user.PendingMessages = userToSave.PendingMessages;
 
-            if(this.IsUserConnected(userToSave))
+            if(this.IsUserConnected(userToSave.Username))
             {
                 this.GetUserSession(user).User = user;
             }

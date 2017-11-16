@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.Reactive.Core, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
@@ -75,7 +76,7 @@
     <Compile Include="FrontEnd\Logs.Designer.cs">
       <DependentUpon>Logs.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogMessageReveiver.cs" />
+    <Compile Include="LogMessageReceiver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Store.cs" />

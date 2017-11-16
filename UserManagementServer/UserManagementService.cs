@@ -29,9 +29,19 @@ namespace UserManagementServer
             RepositoryAccesor.DeleteUser(user);
         }
 
+        public bool ExistsUser(string username)
+        {
+            return RepositoryAccesor.ExistsUser(username);
+        }
+
         public List<User> GetUsers()
         {
             return RepositoryAccesor.GetRegisteredUsers();
+        }
+
+        public bool IsUserConnected(string username)
+        {
+            return RepositoryAccesor.IsUserConnected(username);
         }
 
         public void ModifyUser(string username, User newUser)

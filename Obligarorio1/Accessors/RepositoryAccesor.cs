@@ -71,9 +71,9 @@ namespace Obligarorio1
             this.repository.AddUser(user);
         }
 
-        public bool IsUserConnected(User user)
+        public bool IsUserConnected(string username)
         {
-            return this.repository.IsUserConnected(user);
+            return this.repository.IsUserConnected(username);
         }
 
         public void DisconnectUser(User user)

@@ -43,5 +43,10 @@ namespace UserManagementServer
         {
             this.repository.DeleteUser(user);
         }
+
+        public bool IsUserConnected(string username)
+        {
+            return this.repository.IsUserConnected(username);
+        }
     }
 }

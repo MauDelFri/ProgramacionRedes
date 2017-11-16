@@ -20,6 +20,7 @@ namespace UserManagementClient
         {
             InitializeComponent();
             this.service = new UserManagementServiceClient();
+            this.listRegisteredClients.FullRowSelect = true;
             this.AddUsersToListView(this.service.GetUsers());
         }
 
@@ -42,8 +43,17 @@ namespace UserManagementClient
             if (this.listRegisteredClients.SelectedItems.Count > 0)
             {
                 int selectedIndex = this.listRegisteredClients.Items.IndexOf(this.listRegisteredClients.SelectedItems[0]);
-                this.service.DeleteUser(this.users.ElementAt(selectedIndex));
-                this.AddUsersToListView(this.service.GetUsers());
+                User user = this.users.ElementAt(selectedIndex);
+                if (this.service.IsUserConnected(user.Username))
+                {
+                    this.lblError.Text = "No se puede editar porque el usuario se encuentra conectado";
+                }
+                else
+                {
+                    this.lblError.Text = "";
+                    this.service.DeleteUser(user);
+                    this.AddUsersToListView(this.service.GetUsers());
+                }
             }
         }
 
@@ -72,18 +82,63 @@ namespace UserManagementClient
             newUser.Password = this.txtPassword.Text;
             if (this.isAddingNew)
             {
-                this.service.AddUser(newUser);
+                if (this.IsValidAddUser(newUser))
+                {
+                    this.service.AddUser(newUser);
+                }
             }
             else
             {
                 if (this.listRegisteredClients.SelectedItems.Count > 0)
                 {
                     int selectedIndex = this.listRegisteredClients.Items.IndexOf(this.listRegisteredClients.SelectedItems[0]);
-                    this.service.ModifyUser(this.users.ElementAt(selectedIndex).Username, newUser);
+                    User selectedUser = this.users.ElementAt(selectedIndex);
+                    if(this.IsValidModifyUser(selectedUser.Username, newUser))
+                    this.service.ModifyUser(selectedUser.Username, newUser);
                 }
             }
 
             this.AddUsersToListView(this.service.GetUsers());
+        }
+
+        private bool IsValidAddUser(User newUser)
+        {
+            if (this.txtUsername.Text == "" || this.txtPassword.Text == "")
+            {
+                this.lblError.Text = "Complete todos los campos";
+            }
+            else if (this.service.ExistsUser(newUser.Username))
+            {
+                this.lblError.Text = "El nombre de usuario ya existe";
+            }
+            else
+            {
+                this.lblError.Text = "";
+            }
+
+            return this.lblError.Text != "";
+        }
+
+        private bool IsValidModifyUser(string oldUsername, User newUser)
+        {
+            if (this.txtUsername.Text == "" || this.txtPassword.Text == "")
+            {
+                this.lblError.Text = "Complete todos los campos";
+            }
+            else if (this.service.ExistsUser(newUser.Username) && !newUser.Username.Equals(oldUsername))
+            {
+                this.lblError.Text = "El nombre de usuario ya existe";
+            }
+            else if (this.service.IsUserConnected(oldUsername))
+            {
+                this.lblError.Text = "No se puede editar porque el usuario se encuentra conectado";
+            }
+            else
+            {
+                this.lblError.Text = "";
+            }
+
+            return this.lblError.Text != "";
         }
 
         private void listRegisteredClients_SelectedIndexChanged(object sender, EventArgs e)

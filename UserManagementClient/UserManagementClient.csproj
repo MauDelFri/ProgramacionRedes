@@ -74,7 +74,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -84,25 +86,28 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Service References\UserManagementService\Domain.xsd">
+    <None Include="Service References\UserManagementService\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UserManagementService\service.wsdl" />
-    <None Include="Service References\UserManagementService\service.xsd">
+    <None Include="Service References\UserManagementService\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UserManagementService\service1.xsd">
+    <None Include="Service References\UserManagementService\item2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\UserManagementService\UserManagementClient.UserManagementService.User.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\UserManagementService\UserManagementService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\UserManagementService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UserManagementService\item.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\UserManagementService\configuration91.svcinfo" />

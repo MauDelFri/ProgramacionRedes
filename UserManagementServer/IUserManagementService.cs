@@ -21,5 +21,11 @@ namespace UserManagementServer
 
         [OperationContract]
         void DeleteUser(User user);
+
+        [OperationContract]
+        bool ExistsUser(string username);
+
+        [OperationContract]
+        bool IsUserConnected(string username);
     }
 }
