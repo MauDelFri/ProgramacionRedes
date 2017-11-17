@@ -59,7 +59,6 @@
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -67,9 +66,9 @@
       <Project>{06a445af-200a-430e-895d-52521c27fb3d}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repository\Repository.csproj">
-      <Project>{06d9d42e-602c-4dca-b3c7-95954ec74891}</Project>
-      <Name>Repository</Name>
+    <ProjectReference Include="..\HostRepository\HostRepository.csproj">
+      <Project>{E12E5FFF-B9FA-4B7D-9EFC-C1CE62B9665F}</Project>
+      <Name>HostRepository</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

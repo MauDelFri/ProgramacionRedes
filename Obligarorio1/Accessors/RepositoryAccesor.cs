@@ -7,7 +7,8 @@ using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 using Domain;
-using DataAccess;
+using HostRepository;
+using System.Configuration;
 
 namespace Obligarorio1
 {
@@ -17,18 +18,9 @@ namespace Obligarorio1
 
         public RepositoryAccesor()
         {
-            TcpChannel serverChannel = new TcpChannel(6100);
-            try
-            {
-                ChannelServices.RegisterChannel(serverChannel, false);
-                RemotingConfiguration.RegisterWellKnownServiceType(typeof(Repository), "Repository", WellKnownObjectMode.Singleton);
-                Console.WriteLine("Remoting service started ...\n\n");
-                this.repository = (Repository)Activator.GetObject((typeof(Repository)), "tcp://localhost:6100/Repository");
-            }
-            catch (Exception)
-            {
-                ChannelServices.UnregisterChannel(serverChannel);
-            }
+            Configuration configurationManager = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            KeyValueConfigurationCollection configurationCollection = configurationManager.AppSettings.Settings;
+            this.repository = (Repository)Activator.GetObject((typeof(Repository)), "tcp://" + configurationCollection["repositoryIp"].Value + ":6100/Repository");
         }
 
         public List<Session> GetConnectedSessions()

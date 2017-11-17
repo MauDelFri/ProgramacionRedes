@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DataAccess
+namespace HostRepository
 {
     public class Repository : MarshalByRefObject
     {

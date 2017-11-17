@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Domain;
-using DataAccess;
+using System.Configuration;
+using HostRepository;
 
 namespace UserManagementServer
 {
@@ -11,7 +12,9 @@ namespace UserManagementServer
 
         public RepositoryAccesor()
         {
-            this.repository = (Repository)Activator.GetObject((typeof(Repository)), "tcp://localhost:6100/Repository");
+            Configuration configurationManager = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            KeyValueConfigurationCollection configurationCollection = configurationManager.AppSettings.Settings;
+            this.repository = (Repository)Activator.GetObject((typeof(Repository)), "tcp://" + configurationCollection["repositoryIp"].Value + ":6100/Repository");
         }
 
         public void Initialize()

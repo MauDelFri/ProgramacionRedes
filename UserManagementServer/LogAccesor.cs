@@ -17,8 +17,8 @@ namespace UserManagementServer
         {
             Configuration configurationManager = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             KeyValueConfigurationCollection configurationCollection = configurationManager.AppSettings.Settings;
-            MessageQueue[] queues = MessageQueue.GetPrivateQueuesByMachine(configurationCollection["messageQueueIp"].Value);
-            this.messageQueue = queues.First(q => q.QueueName.Equals(configurationCollection["messageQueueName"].Value));
+            //MessageQueue[] queues = MessageQueue.GetPrivateQueuesByMachine(configurationCollection["messageQueueIp"].Value);
+            this.messageQueue = new MessageQueue(configurationCollection["messageQueueIp"].Value); //queues.First(q => q.QueueName.Equals(configurationCollection["messageQueueName"].Value));
             this.messageQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(Log) });
         }
 
